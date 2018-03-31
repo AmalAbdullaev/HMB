@@ -1,28 +1,28 @@
-class WindInstrument{
+export class WindInstrument{
     constructor(name, instument_file){
         this.name = name;
         this.instument_file = instument_file;
     }
 }
-class StringInstrumet{
+export class StringInstrumet{
     constructor(name, instument_file){
         this.name = name;
         this.instument_file = instument_file;
     }
 }
-class PercussionInstrument{
+export class PercussionInstrument{
     constructor(name, instument_file){
         this.name = name;
         this.instument_file = instument_file;
     }
 }
-class BowInstrument{
+export class BowInstrument{
     constructor(name, instument_file){
         this.name = name;
         this.instument_file = instument_file;
     }
 }
-class KeyboardInstrument{
+export class KeyboardInstrument{
     constructor(name, instument_file){
         this.name = name;
         this.instument_file = instument_file;

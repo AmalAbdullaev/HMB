@@ -1,6 +1,4 @@
-import {Member} from './Member.js';
-
-class Man {
+export class Man {
     sing(song_file){
         this.song_file = song_file;
     }
