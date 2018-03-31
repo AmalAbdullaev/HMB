@@ -1,0 +1,5 @@
+C:\Users\AMAL-COMPUTER\VSP\HMB\source\scripts\es_2015>
+cd ..
+babel es6 -d es_2015
+cd es_2015
+browserify main.js -o main/main.js -d

@@ -74,8 +74,7 @@ function handleOverDrop2(e) {
     draggedEl.style.height = '450px'; 
     draggedEl.style.backgroundImage = 'url(' + "gif/7.gif" + ')';
     
-    arr.push(draggedEl);
-    alert(arr.length);   
+    arr.push(draggedEl);   
     
 }
 let draggable = document.querySelectorAll('[draggable]')
