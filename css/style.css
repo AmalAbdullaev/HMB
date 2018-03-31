@@ -1,0 +1,60 @@
+h2 {
+    color: #a7a3a4;
+    margin-left: 80px;
+}
+
+[data-drop-target] {
+    height: 100px;
+    width: 1400px;
+    margin: 55px;
+    background-color: gainsboro;
+    float:left;
+}
+
+[data-drop-target2] {
+    height: 100px;
+    width: 1400px;
+    margin: 55px;
+    background-color: gainsboro;
+    float:left;
+}
+
+.window {
+    height: 500px;
+    width: 800px;
+}
+
+.drag-enter {
+    border: 2px dashed #000;
+}
+
+.box {
+    width: 50px;
+    height: 50px;
+    float: inherit;
+}
+
+.box:nth-child(1) {
+    clear: both;
+}
+
+.navy {
+    background-color: navy;
+}
+
+.red {
+    background-color: firebrick;
+}
+
+.green {
+    background-color: darkgreen;
+}
+
+.orange {
+    background-color: orange;
+}
+#some_el {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #900;
+}
