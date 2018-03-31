@@ -1,5 +1,6 @@
 export class Man {
-    sing(song_file){
+    sing(song_gif,song_file){
+        this.song_gif = song_gif;
         this.song_file = song_file;
     }
 
@@ -7,7 +8,8 @@ export class Man {
         this.dance_file = dance_file;
     }
 
-    playOnInstrument(instrument_file){
-        this.instrument_file = instrument_file;
+    playOnInstrument(instrument_gif, instrument_mp3_file){
+        this.instrument_gif = instrument_gif;
+        this.instrument_mp3_file = instrument_mp3_file;
     }
 }

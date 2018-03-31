@@ -1,5 +1,6 @@
 export class Woman{
-    sing(song_file){
+    sing(song_gif, song_file){
+        this.song_gif = song_gif;
         this.song_file = song_file;
     }
 
