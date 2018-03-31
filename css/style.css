@@ -14,9 +14,9 @@ h2 {
 }
 
 [data-drop-target2] {
-    height: 100px;
-    width: 1400px;
-    margin: 55px;
+    height: 500px;
+    width: 2850px;
+    margin-left: 55px;
     background-color: gainsboro;
     float:left;
 }
