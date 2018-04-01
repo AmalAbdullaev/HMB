@@ -230,60 +230,10 @@ function comparator2(draggedId){
     }
 }
 
+import {Dance} from './Dancing.js';
+import {WindInstrument , StringInstrumet , PercussionInstrument, BowInstrument, KeyboardInstrument } from './Instrument.js';
+import {Man,Woman} from './Member.js'; 
 
-
-
- class Dance{
-    constructor(dance_file){
-        this.dance_file =  dance_file;
-    }
-}
-
- class WindInstrument{
-    constructor(gif_file,instument_mp3_file){
-        this.gif_file = gif_file;
-        this.instument_mp3_file = instument_mp3_file;
-    }
-}
- class StringInstrumet{
-    constructor(gif_file, instument_mp3_file ){
-        this.gif_file = gif_file;
-        this.instument_mp3_file = instument_mp3_file;
-    }
-}
-class PercussionInstrument{
-    constructor(gif_file, instument_mp3_file){
-        this.gif_file = gif_file;
-        this.instument_mp3_file = instument_mp3_file;
-    }
-}
- class BowInstrument{
-    constructor(gif_file,instument_mp3_file){
-        this.gif_file = gif_file;
-        this.instument_mp3_file = instument_mp3_file;
-    }
-}
- class KeyboardInstrument{
-    constructor(gif_file, instument_mp3_file){
-        this.gif_file = gif_file;
-        this.instument_mp3_file = instument_mp3_file;
-    }
-}
- class Man {
-    sing(song_gif,song_file){
-        this.song_gif = song_gif;
-        this.song_file = song_file;
-    }
-
-    dance(dance_gif_file){
-        this.dance_gif_file = dance_gif_file;
-    }
-
-    playOnInstrument(instrument_gif, instrument_mp3_file){
-        this.instrument_gif = instrument_gif;
-        this.instrument_mp3_file = instrument_mp3_file;
-    }
-}
  class Song{
     constructor(song_gif_file,song_mp3_file){
        this.song_gif_file = song_gif_file;
@@ -291,16 +241,7 @@ class PercussionInstrument{
     }
 }
 
-class Woman{
-    sing(song_gif, song_file){
-        this.song_gif = song_gif;
-        this.song_file = song_file;
-    }
 
-    dance(dance_gif_file){
-        this.dance_gif_file = dance_gif_file;
-    }
-}
 
 let manDance = new Dance('url(' + "gif/12.gif" + ')');
 let womanDance = new Dance('url(' + "gif/5.gif" + ')');//созданы танцы
