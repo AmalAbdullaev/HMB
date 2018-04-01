@@ -45,7 +45,6 @@ function handleOverDrop(e) {
 
 }
 
-
 function handleOverDrop2(e) {
     e.preventDefault();
 
@@ -81,7 +80,6 @@ function handleOverDrop2(e) {
 let draggable = document.querySelectorAll('[draggable]')
 let targets = document.querySelectorAll('[data-drop-target]');
 let targets2 = document.querySelectorAll('[data-drop-target2]');
-
 
 for (let i = 0; i < draggable.length; i++) {
     draggable[i].addEventListener("dragstart", handleDragStart);
@@ -143,7 +141,6 @@ function comparator(draggedId){
     }
 }
 
-
 function width2(draggedId){
     if('box1' == draggedId){
         return '300px';
@@ -185,8 +182,6 @@ function width2(draggedId){
         return '400px';
     }
 }
-
-
 
 function comparator2(draggedId){
     if('box1' == draggedId){
@@ -233,15 +228,7 @@ function comparator2(draggedId){
 import {Dance} from './Dancing.js';
 import {WindInstrument , StringInstrumet , PercussionInstrument, BowInstrument, KeyboardInstrument } from './Instrument.js';
 import {Man,Woman} from './Member.js'; 
-
- class Song{
-    constructor(song_gif_file,song_mp3_file){
-       this.song_gif_file = song_gif_file;
-       this.song_mp3_file = song_mp3_file;
-    }
-}
-
-
+import {Song} from './Song.js';
 
 let manDance = new Dance('url(' + "gif/12.gif" + ')');
 let womanDance = new Dance('url(' + "gif/5.gif" + ')');//созданы танцы

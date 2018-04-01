@@ -6,7 +6,7 @@ var _Instrument = require("./Instrument.js");
 
 var _Member = require("./Member.js");
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _Song = require("./Song.js");
 
 function handleDragStart(e) {
     e.dataTransfer.setData("text", this.id);
@@ -229,18 +229,11 @@ function comparator2(draggedId) {
     }
 }
 
-var Song = function Song(song_gif_file, song_mp3_file) {
-    _classCallCheck(this, Song);
-
-    this.song_gif_file = song_gif_file;
-    this.song_mp3_file = song_mp3_file;
-};
-
 var manDance = new _Dancing.Dance('url(' + "gif/12.gif" + ')');
 var womanDance = new _Dancing.Dance('url(' + "gif/5.gif" + ')'); //созданы танцы
 
-var manSong = new Song('url(' + "gif/1.gif" + ')', 'song_mp3_file');
-var womanSong = new Song('url(' + "gif/10.gif" + ')', 'song_mp3_file'); // созданы песни
+var manSong = new _Song.Song('url(' + "gif/1.gif" + ')', 'song_mp3_file');
+var womanSong = new _Song.Song('url(' + "gif/10.gif" + ')', 'song_mp3_file'); // созданы песни
 
 var accordeon = new _Instrument.KeyboardInstrument('url(' + "gif/2.gif" + ')', 'mp3_url');
 var synthesizer = new _Instrument.KeyboardInstrument('url(' + "gif/3.gif" + ')', 'mp3_url');
