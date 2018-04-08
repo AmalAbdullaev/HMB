@@ -1,3 +1,5 @@
+
+
 function handleDragStart(e) {
     e.dataTransfer.setData("text", this.id);
 }
@@ -26,8 +28,7 @@ function handleOverDrop(e) {
 
     let draggedId = e.dataTransfer.getData("text");
     let draggedEl = document.getElementById(draggedId);
-
-    
+        
     if (draggedEl.parentNode == this) {
         this.className = "";
         return; //note: when a return is reached a function exits.
@@ -79,7 +80,7 @@ function handleOverDrop2(e) {
     draggedEl.style.backgroundImage = comparator(draggedId);
     buttonInComparator(draggedId);
     
-    arr.push(draggedEl);   
+    arr.push(draggedId);   
     
 }
 let draggable = document.querySelectorAll('[draggable]')
@@ -273,6 +274,7 @@ function comparator2(draggedId){
     }
 }
 
+
 import {Dance} from './Dancing.js';
 import {WindInstrument , StringInstrumet , PercussionInstrument, BowInstrument, KeyboardInstrument } from './Instrument.js';
 import {Man,Woman} from './Member.js'; 
@@ -329,3 +331,83 @@ sazPlayer.playOnInstrument(saz.gif_file,saz.instument_mp3_file);
 pipePlayer.playOnInstrument(pipe.gif_file,pipe.instument_mp3_file);
 saxPlayer.playOnInstrument(sax.gif_file,sax.instument_mp3_file);
 violinPlayer.playOnInstrument(violin.gif_file,violin.instument_mp3_file); // заданы инструменты для музыкантов
+
+
+// Вешаем обработчик клика на solo и off каждого участника
+for (let index = 1; index <=13; index++) {
+    document.querySelector('#btnSolo'+index).addEventListener('click', function(e){ 
+        let arr2 = arr.slice(0, arr.length);
+
+        let elemIndex = arr2.indexOf('box'+index);
+        for (let index = 0; index < arr2.length; index++) {
+                if(index!=elemIndex){
+                    comparatorForOffOthers(arr2[index]);
+                }else{
+                    comparator(arr2[index]);
+                }
+
+            }
+    });
+}
+for (let index = 1; index <=13; index++) {
+    document.querySelector('#btnOff'+index).addEventListener('click', function(e){ 
+        let arr2 = arr.slice(0, arr.length);
+
+        let elemIndex = arr2.indexOf('box'+index);
+        for (let index = 0; index < arr2.length; index++) {
+                comparator(arr2[index]);
+            }
+    });
+}
+function comparatorForOffOthers(draggedId){
+    if('box1' == draggedId){
+        return manDancer.dance_gif_file;
+    }
+    if('box2' == draggedId){
+        return womanDancer.dance_gif_file;
+    }
+    if('box3' == draggedId){
+        manSinger.pausePlaySong();
+        return manSinger.song_gif;
+    }
+    if('box4' == draggedId){
+        womanSinger.pausePlaySong();
+        return womanSinger.song_gif;
+    }
+    if('box5' == draggedId){
+        accordeonPlayer.pause();
+        return accordeonPlayer.instrument_gif;
+    }
+    if('box6' == draggedId){
+        bassPlayer.pause();
+        return bassPlayer.instrument_gif;
+    }
+    if('box7' == draggedId){
+        davulPlayer.pause();
+        return davulPlayer.instrument_gif;
+    }
+    if('box8' == draggedId){
+        guitarPlayer.pause();
+        return guitarPlayer.instrument_gif;
+    }
+    if('box9' == draggedId){
+        violinPlayer.pause();
+        return violinPlayer.instrument_gif;
+    }
+    if('box10' == draggedId){
+        pipePlayer.pause();
+        return pipePlayer.instrument_gif;
+    }
+    if('box11' == draggedId){
+        saxPlayer.pause();
+        return saxPlayer.instrument_gif;
+    }
+    if('box12' == draggedId){
+        sazPlayer.pause();
+        return sazPlayer.instrument_gif;
+    }
+    if('box13' == draggedId){
+        synthesizerPlayer.pause();
+        return synthesizerPlayer.instrument_gif;
+    }
+}
