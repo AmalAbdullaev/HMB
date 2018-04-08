@@ -10,5 +10,6 @@ var Song = exports.Song = function Song(song_gif_file, song_mp3_file) {
    _classCallCheck(this, Song);
 
    this.song_gif_file = song_gif_file;
-   this.song_mp3_file = song_mp3_file;
+   this.song_mp3_file = new Audio();
+   this.song_mp3_file.src = song_mp3_file;
 };

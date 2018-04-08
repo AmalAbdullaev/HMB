@@ -12,6 +12,20 @@ export  class Man {
         this.instrument_gif = instrument_gif;
         this.instrument_mp3_file = instrument_mp3_file;
     }
+    play(){
+        this.instrument_mp3_file.play();
+        this.instrument_mp3_file.loop = true;
+    }
+    pause(){
+        this.instrument_mp3_file.pause();
+    }
+    playSong(){
+        this.song_file.play();
+        this.song_file.loop = true;
+    }
+    pausePlaySong(){
+        this.song_file.pause();
+    }
 }
 
 export class Woman{
@@ -22,5 +36,12 @@ export class Woman{
 
     dance(dance_gif_file){
         this.dance_gif_file = dance_gif_file;
+    }
+    playSong(){
+        this.song_file.play();
+        this.song_file.loop = true;
+    }
+    pausePlaySong(){
+        this.song_file.pause();
     }
 }

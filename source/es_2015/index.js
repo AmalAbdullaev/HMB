@@ -111,40 +111,52 @@ function comparator(draggedId) {
         return womanDancer.dance_gif_file;
     }
     if ('box3' == draggedId) {
+        manSinger.playSong();
         return manSinger.song_gif;
     }
     if ('box4' == draggedId) {
+        womanSinger.playSong();
         return womanSinger.song_gif;
     }
     if ('box5' == draggedId) {
+        accordeonPlayer.play();
         return accordeonPlayer.instrument_gif;
     }
     if ('box6' == draggedId) {
+        bassPlayer.play();
         return bassPlayer.instrument_gif;
     }
     if ('box7' == draggedId) {
+        davulPlayer.play();
         return davulPlayer.instrument_gif;
     }
     if ('box8' == draggedId) {
+        guitarPlayer.play();
         return guitarPlayer.instrument_gif;
     }
     if ('box9' == draggedId) {
+        violinPlayer.play();
         return violinPlayer.instrument_gif;
     }
     if ('box10' == draggedId) {
+        pipePlayer.play();
         return pipePlayer.instrument_gif;
     }
     if ('box11' == draggedId) {
+        saxPlayer.play();
         return saxPlayer.instrument_gif;
     }
     if ('box12' == draggedId) {
+        sazPlayer.play();
         return sazPlayer.instrument_gif;
     }
     if ('box13' == draggedId) {
+        synthesizerPlayer.play();
         return synthesizerPlayer.instrument_gif;
     }
 }
-
+// метод возврщает иконки в исходном размере (дроп вниз), 
+// когда иконки все будут одного размера нужно убрать этот метод
 function width2(draggedId) {
     if ('box1' == draggedId) {
         return '300px';
@@ -195,36 +207,47 @@ function comparator2(draggedId) {
         return 'url(' + "icons/icoFes.png" + ')';
     }
     if ('box3' == draggedId) {
+        manSinger.pausePlaySong();
         return 'url(' + "icons/icoMicroH.png" + ')';
     }
     if ('box4' == draggedId) {
+        womanSinger.pausePlaySong();
         return 'url(' + "icons/icoMicroF.png" + ')';
     }
     if ('box5' == draggedId) {
+        accordeonPlayer.pause();
         return 'url(' + "icons/icoMusicAccordeon.png" + ')';
     }
     if ('box6' == draggedId) {
+        bassPlayer.pause();
         return 'url(' + "icons/icoMusicBass.png" + ')';
     }
     if ('box7' == draggedId) {
+        davulPlayer.pause();
         return 'url(' + "icons/icoMusicDavul.png" + ')';
     }
     if ('box8' == draggedId) {
+        guitarPlayer.pause();
         return 'url(' + "icons/icoMusicGuitar.png" + ')';
     }
     if ('box9' == draggedId) {
+        violinPlayer.pause();
         return 'url(' + "icons/icoMusicViolin.png" + ')';
     }
     if ('box10' == draggedId) {
+        pipePlayer.pause();
         return 'url(' + "icons/icoMusicPipe.png" + ')';
     }
     if ('box11' == draggedId) {
+        saxPlayer.pause();
         return 'url(' + "icons/icoMusicSax.png" + ')';
     }
     if ('box12' == draggedId) {
+        sazPlayer.pause();
         return 'url(' + "icons/icoMusicSaz.png" + ')';
     }
     if ('box13' == draggedId) {
+        synthesizerPlayer.pause();
         return 'url(' + "icons/icoMusicSynthesizer.png" + ')';
     }
 }
@@ -232,18 +255,19 @@ function comparator2(draggedId) {
 var manDance = new _Dancing.Dance('url(' + "gif/12.gif" + ')');
 var womanDance = new _Dancing.Dance('url(' + "gif/5.gif" + ')'); //созданы танцы
 
-var manSong = new _Song.Song('url(' + "gif/1.gif" + ')', 'song_mp3_file');
-var womanSong = new _Song.Song('url(' + "gif/10.gif" + ')', 'song_mp3_file'); // созданы песни
+var manSong = new _Song.Song('url(' + "gif/1.gif" + ')', 'music/boom.wav');
+var womanSong = new _Song.Song('url(' + "gif/10.gif" + ')', 'music/tom.wav'); // созданы песни
 
-var accordeon = new _Instrument.KeyboardInstrument('url(' + "gif/2.gif" + ')', 'mp3_url');
-var synthesizer = new _Instrument.KeyboardInstrument('url(' + "gif/3.gif" + ')', 'mp3_url');
-var bass = new _Instrument.PercussionInstrument('url(' + "gif/4.gif" + ')', 'mp3_url');
-var davul = new _Instrument.PercussionInstrument('url(' + "gif/6.gif" + ')', 'mp3_url');
-var guitar = new _Instrument.StringInstrumet('url(' + "gif/7.gif" + ')', 'mp3_url');
-var saz = new _Instrument.StringInstrumet('url(' + "gif/8.gif" + ')', 'mp3_url');
-var pipe = new _Instrument.WindInstrument('url(' + "gif/9.gif" + ')', 'mp3_url');
-var sax = new _Instrument.WindInstrument('url(' + "gif/11.gif" + ')', 'mp3_url');
-var violin = new _Instrument.BowInstrument('url(' + "gif/13.gif" + ')', 'mp3_url'); // созданы инструменты
+//сменить музыку 
+var accordeon = new _Instrument.KeyboardInstrument('url(' + "gif/2.gif" + ')', 'music/boom.wav');
+var synthesizer = new _Instrument.KeyboardInstrument('url(' + "gif/3.gif" + ')', 'music/clap.wav');
+var bass = new _Instrument.PercussionInstrument('url(' + "gif/4.gif" + ')', 'music/hihat.wav');
+var davul = new _Instrument.PercussionInstrument('url(' + "gif/6.gif" + ')', 'music/clap.wav');
+var guitar = new _Instrument.StringInstrumet('url(' + "gif/7.gif" + ')', 'music/kick.wav');
+var saz = new _Instrument.StringInstrumet('url(' + "gif/8.gif" + ')', 'music/tom.wav');
+var pipe = new _Instrument.WindInstrument('url(' + "gif/9.gif" + ')', 'music/kick.wav');
+var sax = new _Instrument.WindInstrument('url(' + "gif/11.gif" + ')', 'music/clap.wav');
+var violin = new _Instrument.BowInstrument('url(' + "gif/13.gif" + ')', 'music/boom.wav'); // созданы инструменты
 
 
 var accordeonPlayer = new _Member.Man();
@@ -267,12 +291,12 @@ womanDancer.dance(womanDance.dance_file);
 manDancer.dance(manDance.dance_file); //заданы танцы для танцоров
 
 
-womanSinger.sing(womanSong.song_gif_file, womanSinger.song_mp3_file);
+womanSinger.sing(womanSong.song_gif_file, womanSong.song_mp3_file);
 manSinger.sing(manSong.song_gif_file, manSong.song_mp3_file); //заданы песни для певцов
 
 accordeonPlayer.playOnInstrument(accordeon.gif_file, accordeon.instument_mp3_file);
 synthesizerPlayer.playOnInstrument(synthesizer.gif_file, synthesizer.instument_mp3_file);
-bassPlayer.playOnInstrument(bass.gif_file, bassPlayer.instrument_mp3_file);
+bassPlayer.playOnInstrument(bass.gif_file, bass.instument_mp3_file);
 davulPlayer.playOnInstrument(davul.gif_file, davul.instument_mp3_file);
 guitarPlayer.playOnInstrument(guitar.gif_file, guitar.instument_mp3_file);
 sazPlayer.playOnInstrument(saz.gif_file, saz.instument_mp3_file);

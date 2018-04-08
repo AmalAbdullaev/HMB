@@ -30,6 +30,28 @@ var Man = exports.Man = function () {
             this.instrument_gif = instrument_gif;
             this.instrument_mp3_file = instrument_mp3_file;
         }
+    }, {
+        key: "play",
+        value: function play() {
+            this.instrument_mp3_file.play();
+            this.instrument_mp3_file.loop = true;
+        }
+    }, {
+        key: "pause",
+        value: function pause() {
+            this.instrument_mp3_file.pause();
+        }
+    }, {
+        key: "playSong",
+        value: function playSong() {
+            this.song_file.play();
+            this.song_file.loop = true;
+        }
+    }, {
+        key: "pausePlaySong",
+        value: function pausePlaySong() {
+            this.song_file.pause();
+        }
     }]);
 
     return Man;
@@ -50,6 +72,17 @@ var Woman = exports.Woman = function () {
         key: "dance",
         value: function dance(dance_gif_file) {
             this.dance_gif_file = dance_gif_file;
+        }
+    }, {
+        key: "playSong",
+        value: function playSong() {
+            this.song_file.play();
+            this.song_file.loop = true;
+        }
+    }, {
+        key: "pausePlaySong",
+        value: function pausePlaySong() {
+            this.song_file.pause();
         }
     }]);
 
