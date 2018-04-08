@@ -49,6 +49,9 @@ function handleOverDrop(e) {
     draggedEl.style.height = '400px';
     draggedEl.style.float = 'inherit';
     draggedEl.style.backgroundImage = comparator2(draggedId);
+
+    buttonOutComparator(draggedId);
+
     arr.pop();
 }
 
@@ -79,6 +82,7 @@ function handleOverDrop2(e) {
     draggedEl.style.height = '450px';
 
     draggedEl.style.backgroundImage = comparator(draggedId);
+    buttonInComparator(draggedId);
 
     arr.push(draggedEl);
 }
@@ -101,6 +105,24 @@ for (var _i2 = 0; _i2 < targets.length; _i2++) {
     targets2[_i2].addEventListener("drop", handleOverDrop2);
     targets2[_i2].addEventListener("dragenter", handleDragEnterLeave);
     targets2[_i2].addEventListener("dragleave", handleDragEnterLeave);
+}
+
+function buttonInComparator(draggedId) {
+    for (var index = 1; index <= 13; index++) {
+        if ('box' + index == draggedId) {
+            document.getElementById('btnSolo' + index).style.display = 'block';
+            document.getElementById('btnOff' + index).style.display = 'block';
+        }
+    }
+}
+
+function buttonOutComparator(draggedId) {
+    for (var index = 1; index <= 13; index++) {
+        if ('box' + index == draggedId) {
+            document.getElementById('btnSolo' + index).style.display = 'none';
+            document.getElementById('btnOff' + index).style.display = 'none';
+        }
+    }
 }
 
 function comparator(draggedId) {
@@ -252,11 +274,11 @@ function comparator2(draggedId) {
     }
 }
 
-var manDance = new _Dancing.Dance('url(' + "gif/12.gif" + ')');
-var womanDance = new _Dancing.Dance('url(' + "gif/5.gif" + ')'); //созданы танцы
+var manDance = new _Dancing.Dance('url(' + "gif/5.gif" + ')');
+var womanDance = new _Dancing.Dance('url(' + "gif/12.gif" + ')'); //созданы танцы
 
 var manSong = new _Song.Song('url(' + "gif/1.gif" + ')', 'music/boom.wav');
-var womanSong = new _Song.Song('url(' + "gif/10.gif" + ')', 'music/tom.wav'); // созданы песни
+var womanSong = new _Song.Song('url(' + "gif/10.gif" + ')', 'music/womsong.wav'); // созданы песни
 
 //сменить музыку 
 var accordeon = new _Instrument.KeyboardInstrument('url(' + "gif/2.gif" + ')', 'music/boom.wav');

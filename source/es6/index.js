@@ -41,6 +41,9 @@ function handleOverDrop(e) {
     draggedEl.style.height = '400px';
     draggedEl.style.float = 'inherit';
     draggedEl.style.backgroundImage = comparator2(draggedId);
+
+    buttonOutComparator(draggedId);
+
     arr.pop();
 
 }
@@ -74,6 +77,7 @@ function handleOverDrop2(e) {
     draggedEl.style.height = '450px'; 
 
     draggedEl.style.backgroundImage = comparator(draggedId);
+    buttonInComparator(draggedId);
     
     arr.push(draggedEl);   
     
@@ -81,6 +85,7 @@ function handleOverDrop2(e) {
 let draggable = document.querySelectorAll('[draggable]')
 let targets = document.querySelectorAll('[data-drop-target]');
 let targets2 = document.querySelectorAll('[data-drop-target2]');
+
 
 for (let i = 0; i < draggable.length; i++) {
     draggable[i].addEventListener("dragstart", handleDragStart);
@@ -98,6 +103,26 @@ for (let i = 0; i < targets.length; i++) {
     targets2[i].addEventListener("dragenter", handleDragEnterLeave);
     targets2[i].addEventListener("dragleave", handleDragEnterLeave);
 }
+
+
+function buttonInComparator(draggedId){
+    for (let index = 1; index <=13; index++) {
+        if(('box'+index) == draggedId){
+            document.getElementById('btnSolo'+index).style.display = 'block';
+            document.getElementById('btnOff'+index).style.display = 'block';
+        }
+    }
+}
+
+function buttonOutComparator(draggedId){
+    for (let index = 1; index <=13; index++) {
+        if(('box'+index) == draggedId){
+            document.getElementById('btnSolo'+index).style.display = 'none';
+            document.getElementById('btnOff'+index).style.display = 'none';
+        }
+    }
+}
+
 
 function comparator(draggedId){
     if('box1' == draggedId){
@@ -253,11 +278,11 @@ import {WindInstrument , StringInstrumet , PercussionInstrument, BowInstrument, 
 import {Man,Woman} from './Member.js'; 
 import {Song} from './Song.js';
 
-let manDance = new Dance('url(' + "gif/12.gif" + ')');
-let womanDance = new Dance('url(' + "gif/5.gif" + ')');//созданы танцы
+let manDance = new Dance('url(' + "gif/5.gif" + ')');
+let womanDance = new Dance('url(' + "gif/12.gif" + ')');//созданы танцы
 
 let manSong = new Song('url(' + "gif/1.gif" + ')','music/boom.wav');
-let womanSong = new Song('url(' + "gif/10.gif" + ')', 'music/tom.wav'); // созданы песни
+let womanSong = new Song('url(' + "gif/10.gif" + ')', 'music/womsong.wav'); // созданы песни
 
 //сменить музыку 
 let accordeon = new KeyboardInstrument('url(' + "gif/2.gif" + ')','music/boom.wav');
