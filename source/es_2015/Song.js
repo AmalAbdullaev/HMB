@@ -6,10 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Song = exports.Song = function Song(song_gif_file, song_mp3_file) {
+var Song = exports.Song = function Song(songFile) {
    _classCallCheck(this, Song);
 
-   this.song_gif_file = song_gif_file;
-   this.song_mp3_file = new Audio();
-   this.song_mp3_file.src = song_mp3_file;
+   this.songFile = new Audio();
+   this.songFile.src = songFile;
 };

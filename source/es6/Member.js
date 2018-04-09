@@ -1,47 +1,70 @@
-export  class Man {
-    sing(song_gif,song_file){
-        this.song_gif = song_gif;
-        this.song_file = song_file;
-    }
-
-    dance(dance_gif_file){
-        this.dance_gif_file = dance_gif_file;
-    }
-
-    playOnInstrument(instrument_gif, instrument_mp3_file){
-        this.instrument_gif = instrument_gif;
-        this.instrument_mp3_file = instrument_mp3_file;
+export class ManDancer {
+    constructor(dance){
+        this.dance = dance;
     }
     play(){
-        this.instrument_mp3_file.play();
-        this.instrument_mp3_file.loop = true;
+        return this.dance.startDanceFile;
     }
     pause(){
-        this.instrument_mp3_file.pause();
-    }
-    playSong(){
-        this.song_file.play();
-        this.song_file.loop = true;
-    }
-    pausePlaySong(){
-        this.song_file.pause();
+        return this.dance.stopDanceFile;
     }
 }
-
-export class Woman{
-    sing(song_gif, song_file){
-        this.song_gif = song_gif;
-        this.song_file = song_file;
+export class WomanDancer {
+    constructor(dance){
+        this.dance = dance;
     }
-
-    dance(dance_gif_file){
-        this.dance_gif_file = dance_gif_file;
+    play(){
+        return this.dance.startDanceFile;
     }
-    playSong(){
-        this.song_file.play();
-        this.song_file.loop = true;
+    pause(){
+        return this.dance.stopDanceFile;
     }
-    pausePlaySong(){
-        this.song_file.pause();
+}
+export class ManSinger {
+    constructor(song,startSingingFile,stopSingingFile){
+        this.song = song;
+        this.startSingingFile = startSingingFile;
+        this.stopSingingFile = stopSingingFile;
+    }
+    play(){
+        this.song.songFile.play();
+        this.song.songFile.loop = true;
+        return this.startSingingFile;
+    }
+    pause(){
+        this.song.songFile.pause();
+        return this.stopSingingFile;
+    }
+}
+export class WomanSinger {
+    constructor(song,startSingingFile,stopSingingFile){
+        this.song = song;
+        this.startSingingFile = startSingingFile;
+        this.stopSingingFile = stopSingingFile;
+    }
+    play(){
+        this.song.songFile.play();
+        this.song.songFile.loop = true;
+        return this.startSingingFile;
+    }
+    pause(){
+        this.song.songFile.pause();
+        return this.stopSingingFile;
+    }
+}
+export class Musician {
+    constructor(instrument,startPlayFile,stopPlayFile){
+        this.instrument = instrument;
+        this.startPlayFile = startPlayFile;
+        this.stopPlayFile = stopPlayFile;
+    }
+    play(){
+        this.instrument.sound.play();
+        this.instrument.sound.loop = true;
+        return this.startPlayFile;
+    }
+    pause(){
+        this.instrument.sound.pause();
+        return this.stopPlayFile;
     }
 }
