@@ -1,0 +1,9 @@
+.button{
+    font-size: 30px;
+    
+}
+.buttonBlock{
+   padding-top:400px;
+   padding-left: 100px; 
+   display:none;  
+}

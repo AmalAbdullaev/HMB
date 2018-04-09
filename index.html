@@ -5,35 +5,180 @@
     <meta charset="UTF-8">
     <title>Pure JS drag and drop functionality.</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/button.css">
 </head>
 
 <body>
 
     <div class="window">
         <!--Second Drop Target-->
-        <div data-drop-target2="true"></div>
+        <div id = 'content2' data-drop-target2="true"></div>
     </div>
 
     <!--First Drop Target-->
     <h2>Тяни на верх</h2>
     <div class="window">
         <div data-drop-target="true">
-            <div id="box1" draggable="true" class="box danceMan"></div>
-            <div id="box2" draggable="true" class="box danceGirl"></div>
-            <div id="box3" draggable="true" class="box singerMan"></div>
-            <div id="box4" draggable="true" class="box singerGirl"></div>
-            <div id="box5" draggable="true" class="box accordeon"></div>
-            <div id="box6" draggable="true" class="box bass"></div>
-            <div id="box7" draggable="true" class="box davul"></div>
-            <div id="box8" draggable="true" class="box guitar"></div>
-            <div id="box9" draggable="true" class="box violin"></div>
-            <div id="box10" draggable="true" class="box pipe"></div>
-            <div id="box11" draggable="true" class="box sax"></div>
-            <div id="box12" draggable="true" class="box saz"></div>
-            <div id="box13" draggable="true" class="box synthesizer"></div>
+            <div id="box1" draggable="true" class="box danceMan">
+                <div  id = "btnBlock1" class="buttonBlock">
+                    <div>                       
+                        <input id="btnSoloOn1" type='button' value='SoloOn' class="button" />
+                        <input id="btnSoloOff1" type='button' value='SoloOff' class="button" />
+                    </div>
+                    <div>
+                        <input id="btnPause1" type='button' value='Pause' class="button" />
+                        <input id="btnPlay1" type='button' value='Play' class="button" />
+                    </div>
+                </div>
+            </div>
+            <div id="box2" draggable="true" class="box danceGirl">
+                <div  id = "btnBlock2" class="buttonBlock">
+                        <div>                       
+                            <input id="btnSoloOn2" type='button' value='SoloOn' class="button" />
+                            <input id="btnSoloOff2" type='button' value='SoloOff' class="button" />
+                        </div>
+                        <div>
+                            <input id="btnPause2" type='button' value='Pause' class="button" />
+                            <input id="btnPlay2" type='button' value='Play' class="button" />
+                        </div>
+                    </div>
+            </div>
+            <div id="box3" draggable="true" class="box singerMan">
+                    <div  id = "btnBlock3" class="buttonBlock">
+                            <div>                       
+                                <input id="btnSoloOn3" type='button' value='SoloOn' class="button" />
+                                <input id="btnSoloOff3" type='button' value='SoloOff' class="button" />
+                            </div>
+                            <div>
+                                <input id="btnPause3" type='button' value='Pause' class="button" />
+                                <input id="btnPlay3" type='button' value='Play' class="button" />
+                            </div>
+                        </div>
+            </div>
+            <div id="box4" draggable="true" class="box singerGirl">
+                <div  id = "btnBlock4" class="buttonBlock">
+                        <div>                       
+                            <input id="btnSoloOn4" type='button' value='SoloOn' class="button" />
+                            <input id="btnSoloOff4" type='button' value='SoloOff' class="button" />
+                        </div>
+                        <div>
+                            <input id="btnPause4" type='button' value='Pause' class="button" />
+                            <input id="btnPlay4" type='button' value='Play' class="button" />
+                        </div>
+                    </div>
+            </div>
+            <div id="box5" draggable="true" class="box accordeon">
+                <div  id = "btnBlock5" class="buttonBlock">
+                        <div>                       
+                            <input id="btnSoloOn5" type='button' value='SoloOn' class="button" />
+                            <input id="btnSoloOff5" type='button' value='SoloOff' class="button" />
+                        </div>
+                        <div>
+                            <input id="btnPause5" type='button' value='Pause' class="button" />
+                            <input id="btnPlay5" type='button' value='Play' class="button" />
+                        </div>
+                </div>
+            </div>
+            <div id="box6" draggable="true" class="box bass">
+                <div  id = "btnBlock6" class="buttonBlock">
+                        <div>                       
+                            <input id="btnSoloOn6" type='button' value='SoloOn' class="button" />
+                            <input id="btnSoloOff6" type='button' value='SoloOff' class="button" />
+                        </div>
+                        <div>
+                            <input id="btnPause6" type='button' value='Pause' class="button" />
+                            <input id="btnPlay6" type='button' value='Play' class="button" />
+                        </div>
+                </div>
+            </div>
+            <div id="box7" draggable="true" class="box davul">
+                <div  id = "btnBlock7" class="buttonBlock">
+                        <div>                       
+                            <input id="btnSoloOn7" type='button' value='SoloOn' class="button" />
+                            <input id="btnSoloOff7" type='button' value='SoloOff' class="button" />
+                        </div>
+                        <div>
+                            <input id="btnPause7" type='button' value='Pause' class="button" />
+                            <input id="btnPlay7" type='button' value='Play' class="button" />
+                        </div>
+                </div>
+            </div>
+            <div id="box8" draggable="true" class="box guitar">
+                <div  id = "btnBlock8" class="buttonBlock">
+                        <div>                       
+                            <input id="btnSoloOn8" type='button' value='SoloOn' class="button" />
+                            <input id="btnSoloOff8" type='button' value='SoloOff' class="button" />
+                        </div>
+                        <div>
+                            <input id="btnPause8" type='button' value='Pause' class="button" />
+                            <input id="btnPlay8" type='button' value='Play' class="button" />
+                        </div>
+                </div>
+            </div>
+            <div id="box9" draggable="true" class="box violin">
+                <div  id = "btnBlock9" class="buttonBlock">
+                        <div>                       
+                            <input id="btnSoloOn9" type='button' value='SoloOn' class="button" />
+                            <input id="btnSoloOff9" type='button' value='SoloOff' class="button" />
+                        </div>
+                        <div>
+                            <input id="btnPause9" type='button' value='Pause' class="button" />
+                            <input id="btnPlay9" type='button' value='Play' class="button" />
+                        </div>
+                </div>
+            </div>
+            <div id="box10" draggable="true" class="box pipe">
+                <div  id = "btnBlock10" class="buttonBlock">
+                        <div>                       
+                            <input id="btnSoloOn10" type='button' value='SoloOn' class="button" />
+                            <input id="btnSoloOff10" type='button' value='SoloOff' class="button" />
+                        </div>
+                        <div>
+                            <input id="btnPause10" type='button' value='Pause' class="button" />
+                            <input id="btnPlay10" type='button' value='Play' class="button" />
+                        </div>
+                </div>
+            </div>
+            <div id="box11" draggable="true" class="box sax">
+                <div  id = "btnBlock11" class="buttonBlock">
+                        <div>                       
+                            <input id="btnSoloOn11" type='button' value='SoloOn' class="button" />
+                            <input id="btnSoloOff11" type='button' value='SoloOff' class="button" />
+                        </div>
+                        <div>
+                            <input id="btnPause11" type='button' value='Pause' class="button" />
+                            <input id="btnPlay11" type='button' value='Play' class="button" />
+                        </div>
+                </div>
+            </div>
+            <div id="box12" draggable="true" class="box saz">
+                <div  id = "btnBlock12" class="buttonBlock">
+                        <div>                       
+                            <input id="btnSoloOn12" type='button' value='SoloOn' class="button" />
+                            <input id="btnSoloOff12" type='button' value='SoloOff' class="button" />
+                        </div>
+                        <div>
+                            <input id="btnPause12" type='button' value='Pause' class="button" />
+                            <input id="btnPlay12" type='button' value='Play' class="button" />
+                        </div>
+                </div>
+            </div>
+            <div id="box13" draggable="true" class="box synthesizer">
+                <div  id = "btnBlock13" class="buttonBlock">
+                        <div>                       
+                            <input id="btnSoloOn13" type='button' value='SoloOn' class="button" />
+                            <input id="btnSoloOff13" type='button' value='SoloOff' class="button" />
+                        </div>
+                        <div>
+                            <input id="btnPause13" type='button' value='Pause' class="button" />
+                            <input id="btnPlay13" type='button' value='Play' class="button" />
+                        </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="source/es_2015/main/index.js"></script>
+    <script src="source/button.js"></script>
 </body>
 
 </html>

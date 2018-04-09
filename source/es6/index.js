@@ -1,3 +1,43 @@
+import {closeButtons,openButtons} from "./buttons.js";
+import {Dance} from './Dancing.js';
+import {WindInstrument , StringInstrumet , PercussionInstrument, BowInstrument, KeyboardInstrument } from './Instrument.js';
+import {ManDancer,WomanDancer,ManSinger,WomanSinger,Musician} from './Member.js'; 
+import {Song} from './Song.js';
+
+let manDance = new Dance('url(' + "gif/5.gif" + ')','url(' + "stopGif/1.jpg" + ')');
+let womanDance = new Dance('url(' + "gif/12.gif" + ')','url(' + "stopGif/1.jpg" + ')');//созданы танцы
+
+let manSong = new Song('music/womsong.wav');
+let womanSong = new Song('music/womsong.wav'); // созданы песни
+
+//сменить музыку 
+let accordeon = new KeyboardInstrument('music/accordeon.mp3');
+let synthesizer = new KeyboardInstrument('music/synthesizer.mp3');
+let bass = new PercussionInstrument('music/bass.mp3');
+let davul = new PercussionInstrument('music/davul.mp3');
+let guitar = new StringInstrumet('music/guitar.mp3');
+let saz = new StringInstrumet('music/saz.mp3');
+let pipe = new WindInstrument('music/pipe.mp3');
+let sax = new WindInstrument('music/sax.mp3');
+let violin = new BowInstrument('music/violin.mp3'); // созданы инструменты
+
+let womanDancer = new WomanDancer(womanDance);
+let manDancer = new ManDancer(manDance); //созданые танцоры
+
+let womanSinger = new WomanSinger(womanSong,'url(' + "gif/1.gif" + ')','url(' + "stopGif/1.jpg" + ')');
+let manSinger = new ManSinger(manSong,'url(' + "gif/2.gif" + ')','url(' + "stopGif/1.jpg" + ')');// созданы певцы
+
+let accordeonPlayer = new Musician(accordeon,'url(' + "gif/3.gif" + ')','url(' + "stopGif/1.jpg" + ')');
+let synthesizerPlayer = new Musician(synthesizer,'url(' + "gif/4.gif" + ')','url(' + "stopGif/1.jpg" + ')');
+let bassPlayer = new Musician(bass,'url(' + "gif/13.gif" + ')','url(' + "stopGif/1.jpg" + ')');
+let davulPlayer = new Musician(davul,'url(' + "gif/6.gif" + ')','url(' + "stopGif/1.jpg" + ')');
+let guitarPlayer = new Musician(guitar,'url(' + "gif/7.gif" + ')','url(' + "stopGif/1.jpg" + ')');
+let sazPlayer = new Musician(saz,'url(' + "gif/8.gif" + ')','url(' + "stopGif/1.jpg" + ')');
+let pipePlayer = new Musician(pipe,'url(' + "gif/9.gif" + ')','url(' + "stopGif/1.jpg" + ')');
+let saxPlayer = new Musician(sax,'url(' + "gif/10.gif" + ')','url(' + "stopGif/1.jpg" + ')');
+let violinPlayer = new Musician(violin,'url(' + "gif/11.gif" + ')','url(' + "stopGif/1.jpg" + ')'); // созданы люди играющие на инструментах
+
+
 function handleDragStart(e) {
     e.dataTransfer.setData("text", this.id);
 }
@@ -16,31 +56,36 @@ function handleDragEnterLeave(e) {
 }
 
 let arr = [];
-
+    
+    
 function handleOverDrop(e) {
     e.preventDefault();
 
     if (e.type != "drop") {
-        return; //Means function will exit if no "drop" event is fired.
+        return; 
     }
 
     let draggedId = e.dataTransfer.getData("text");
     let draggedEl = document.getElementById(draggedId);
-
-
+        
     if (draggedEl.parentNode == this) {
         this.className = "";
-        return; //note: when a return is reached a function exits.
+        return; 
     }
 
     draggedEl.parentNode.removeChild(draggedEl);
     this.appendChild(draggedEl);
     this.className = "";
     
+    //убрать потом  width and height
     draggedEl.style.width = width2(draggedId);
     draggedEl.style.height = '400px';
     draggedEl.style.float = 'inherit';
-    draggedEl.style.backgroundImage = comparator2(draggedId);
+    draggedEl.style.backgroundImage = getIcon(draggedId);
+
+    
+    closeButtons(draggedId);
+
     arr.pop();
 
 }
@@ -59,7 +104,8 @@ function handleOverDrop2(e) {
     let draggedId = e.dataTransfer.getData("text");
     let draggedEl = document.getElementById(draggedId);
 
-
+    
+    
     if (draggedEl.parentNode == this) {
         this.className = "";
         return; //note: when a return is reached a function exits.
@@ -72,75 +118,233 @@ function handleOverDrop2(e) {
     draggedEl.style.width = '450px';
     draggedEl.style.height = '450px'; 
 
-    draggedEl.style.backgroundImage = comparator(draggedId);
+    draggedEl.style.backgroundImage = activation(draggedId);
     
-    arr.push(draggedEl);   
+    
+    openButtons(draggedId);
+    
+    arr.push(draggedId);   
     
 }
 let draggable = document.querySelectorAll('[draggable]')
 let targets = document.querySelectorAll('[data-drop-target]');
 let targets2 = document.querySelectorAll('[data-drop-target2]');
 
-for (let i = 0; i < draggable.length; i++) {
-    draggable[i].addEventListener("dragstart", handleDragStart);
-}
+//задаем дропы на элементы
+(function(){
+    for (let i = 0; i < draggable.length; i++) {
+        draggable[i].addEventListener("dragstart", handleDragStart);
+    }
+    
+    for (let i = 0; i < targets.length; i++) {
+        targets[i].addEventListener("dragover", handleOverDrop);
+        targets[i].addEventListener("drop", handleOverDrop);
+        targets[i].addEventListener("dragenter", handleDragEnterLeave);
+        targets[i].addEventListener("dragleave", handleDragEnterLeave);
+    }
+    for (let i = 0; i < targets.length; i++) {
+        targets2[i].addEventListener("dragover", handleOverDrop2);
+        targets2[i].addEventListener("drop", handleOverDrop2);
+        targets2[i].addEventListener("dragenter", handleDragEnterLeave);
+        targets2[i].addEventListener("dragleave", handleDragEnterLeave);
+    }
+})();
 
-for (let i = 0; i < targets.length; i++) {
-    targets[i].addEventListener("dragover", handleOverDrop);
-    targets[i].addEventListener("drop", handleOverDrop);
-    targets[i].addEventListener("dragenter", handleDragEnterLeave);
-    targets[i].addEventListener("dragleave", handleDragEnterLeave);
-}
-for (let i = 0; i < targets.length; i++) {
-    targets2[i].addEventListener("dragover", handleOverDrop2);
-    targets2[i].addEventListener("drop", handleOverDrop2);
-    targets2[i].addEventListener("dragenter", handleDragEnterLeave);
-    targets2[i].addEventListener("dragleave", handleDragEnterLeave);
-}
-
-function comparator(draggedId){
+//активации участника
+function activation(draggedId){
+    
     if('box1' == draggedId){
-        return manDancer.dance_gif_file;
+        return manDancer.play();
     }
     if('box2' == draggedId){
-        return womanDancer.dance_gif_file;
+        return womanDancer.play();
     }
     if('box3' == draggedId){
-        return manSinger.song_gif;
+        return manSinger.play();
     }
     if('box4' == draggedId){
-        return womanSinger.song_gif;
+        return womanSinger.play();
     }
     if('box5' == draggedId){
-        return accordeonPlayer.instrument_gif;
+        return accordeonPlayer.play();
     }
     if('box6' == draggedId){
-        return bassPlayer.instrument_gif;
+        return bassPlayer.play();
     }
     if('box7' == draggedId){
-        return davulPlayer.instrument_gif;
+        return davulPlayer.play();
     }
     if('box8' == draggedId){
-        return guitarPlayer.instrument_gif;
+        return guitarPlayer.play();
     }
     if('box9' == draggedId){
-        return violinPlayer.instrument_gif;
+        return violinPlayer.play();
     }
     if('box10' == draggedId){
-        return pipePlayer.instrument_gif;
+        return pipePlayer.play();
     }
     if('box11' == draggedId){
-        return saxPlayer.instrument_gif;
+        return saxPlayer.play();
     }
     if('box12' == draggedId){
-        return sazPlayer.instrument_gif;
+        return sazPlayer.play();
     }
     if('box13' == draggedId){
-        return synthesizerPlayer.instrument_gif;
-
+        return synthesizerPlayer.play();
     }
 }
 
+//отключает участника
+function pause(draggedId){
+    if('box1' == draggedId){
+        return manDancer.pause();
+    }
+    if('box2' == draggedId){
+        return womanDancer.pause();
+    }
+    if('box3' == draggedId){
+        return manSinger.pause();
+    }
+    if('box4' == draggedId){
+        return womanSinger.pause();
+    }
+    if('box5' == draggedId){
+        return accordeonPlayer.pause();
+    }
+    if('box6' == draggedId){
+        return bassPlayer.pause();
+    }
+    if('box7' == draggedId){
+        return davulPlayer.pause();
+    }
+    if('box8' == draggedId){
+        return guitarPlayer.pause();
+    }
+    if('box9' == draggedId){
+        return violinPlayer.pause();
+    }
+    if('box10' == draggedId){
+        return pipePlayer.pause();
+    }
+    if('box11' == draggedId){
+        return saxPlayer.pause();
+    }
+    if('box12' == draggedId){
+        return sazPlayer.pause();
+    }
+    if('box13' == draggedId){
+        return synthesizerPlayer.pause();
+    }
+}
+
+function getIcon(draggedId){
+    if('box1' == draggedId){
+        return 'url(' + "icons/icoHalpah.png" + ')';
+    }
+    if('box2' == draggedId){
+        return 'url(' + "icons/icoFes.png" + ')';
+    }
+    if('box3' == draggedId){
+        manSinger.pause();
+        return 'url(' + "icons/icoMicroH.png" + ')';
+    }
+    if('box4' == draggedId){
+        womanSinger.pause();
+        return 'url(' + "icons/icoMicroF.png" + ')';
+    }
+    if('box5' == draggedId){
+        accordeonPlayer.pause();
+        return 'url(' + "icons/icoMusicAccordeon.png" + ')';
+    }
+    if('box6' == draggedId){
+        bassPlayer.pause();
+        return 'url(' + "icons/icoMusicBass.png" + ')';
+    }
+    if('box7' == draggedId){
+        davulPlayer.pause();
+        return 'url(' + "icons/icoMusicDavul.png" + ')';
+    }
+    if('box8' == draggedId){
+        guitarPlayer.pause();
+        return 'url(' + "icons/icoMusicGuitar.png" + ')';
+    }
+    if('box9' == draggedId){
+        violinPlayer.pause();
+        return 'url(' + "icons/icoMusicViolin.png" + ')';
+    }
+    if('box10' == draggedId){
+        pipePlayer.pause();
+        return 'url(' + "icons/icoMusicPipe.png" + ')';
+    }
+    if('box11' == draggedId){
+        saxPlayer.pause();
+        return 'url(' + "icons/icoMusicSax.png" + ')';
+    }
+    if('box12' == draggedId){
+        sazPlayer.pause();
+        return 'url(' + "icons/icoMusicSaz.png" + ')';
+    }
+    if('box13' == draggedId){
+        synthesizerPlayer.pause();
+        return 'url(' + "icons/icoMusicSynthesizer.png" + ')';
+    }
+}
+
+//обработчики кнопок solo(on-off) and play(on-off)
+(function (){
+    // Вешаем обработчик клика на solo  каждого участника
+    for (let index = 1; index <=13; index++) {
+        document.querySelector('#btnSoloOn'+index).addEventListener('click', function(e){ 
+            let arr2 = arr.slice(0, arr.length);
+    
+            let elemIndex = arr2.indexOf('box'+index);
+            for (let index = 0; index < arr2.length; index++) {
+                    if(index!=elemIndex){
+                        let elem = document.getElementById(arr2[index]);
+                        elem.style.backgroundImage = pause(arr2[index]);
+                    }else{
+                        let elem = document.getElementById(arr2[index]);
+                        elem.style.backgroundImage = activation(arr2[index]);
+                    }
+    
+                }
+        });
+    }
+    
+    for (let index = 1; index <=13; index++) {
+        document.querySelector('#btnSoloOff'+index).addEventListener('click', function(e){ 
+            let arr2 = arr.slice(0, arr.length);
+    
+            let elemIndex = arr2.indexOf('box'+index);
+            for (let index = 0; index < arr2.length; index++) {
+                let elem = document.getElementById(arr2[index]);
+                elem.style.backgroundImage = activation(arr2[index]);
+                }
+        });
+    }
+    // Вешаем обработчик клика на off  каждого участника
+    for (let index = 1; index <=13; index++) {
+        document.querySelector('#btnPause'+index).addEventListener('click', function(e){ 
+            let arr2 = arr.slice(0, arr.length);
+    
+            let elemIndex = arr2.indexOf('box'+index);
+            let elem = document.getElementById(arr2[elemIndex]);
+            elem.style.backgroundImage = pause(arr2[elemIndex]);
+        });
+    }
+    for (let index = 1; index <=13; index++) {
+        document.querySelector('#btnPlay'+index).addEventListener('click', function(e){ 
+            let arr2 = arr.slice(0, arr.length);
+    
+            let elemIndex = arr2.indexOf('box'+index);
+            let elem = document.getElementById(arr2[elemIndex]);
+            elem.style.backgroundImage = activation(arr2[elemIndex]);
+        });
+    }
+})();
+
+// метод возврщает иконки в исходном размере (дроп вниз), 
+// когда иконки все будут одного размера нужно убрать этот метод
 function width2(draggedId){
     if('box1' == draggedId){
         return '300px';
@@ -182,101 +386,3 @@ function width2(draggedId){
         return '400px';
     }
 }
-
-function comparator2(draggedId){
-    if('box1' == draggedId){
-        return 'url(' + "icons/icoHalpah.png" + ')';
-    }
-    if('box2' == draggedId){
-        return 'url(' + "icons/icoFes.png" + ')';
-    }
-    if('box3' == draggedId){
-        return 'url(' + "icons/icoMicroH.png" + ')';
-    }
-    if('box4' == draggedId){
-        return 'url(' + "icons/icoMicroF.png" + ')';
-    }
-    if('box5' == draggedId){
-        return 'url(' + "icons/icoMusicAccordeon.png" + ')';
-    }
-    if('box6' == draggedId){
-        return 'url(' + "icons/icoMusicBass.png" + ')';
-    }
-    if('box7' == draggedId){
-        return 'url(' + "icons/icoMusicDavul.png" + ')';
-    }
-    if('box8' == draggedId){
-        return 'url(' + "icons/icoMusicGuitar.png" + ')';
-    }
-    if('box9' == draggedId){
-        return 'url(' + "icons/icoMusicViolin.png" + ')';
-    }
-    if('box10' == draggedId){
-        return 'url(' + "icons/icoMusicPipe.png" + ')';
-    }
-    if('box11' == draggedId){
-        return 'url(' + "icons/icoMusicSax.png" + ')';
-    }
-    if('box12' == draggedId){
-        return 'url(' + "icons/icoMusicSaz.png" + ')';
-    }
-    if('box13' == draggedId){
-        return 'url(' + "icons/icoMusicSynthesizer.png" + ')';
-    }
-}
-
-import {Dance} from './Dancing.js';
-import {WindInstrument , StringInstrumet , PercussionInstrument, BowInstrument, KeyboardInstrument } from './Instrument.js';
-import {Man,Woman} from './Member.js'; 
-import {Song} from './Song.js';
-
-let manDance = new Dance('url(' + "gif/12.gif" + ')');
-let womanDance = new Dance('url(' + "gif/5.gif" + ')');//созданы танцы
-
-let manSong = new Song('url(' + "gif/1.gif" + ')','song_mp3_file');
-let womanSong = new Song('url(' + "gif/10.gif" + ')', 'song_mp3_file'); // созданы песни
-
-let accordeon = new KeyboardInstrument('url(' + "gif/2.gif" + ')','mp3_url');
-let synthesizer = new KeyboardInstrument('url(' + "gif/3.gif" + ')','mp3_url');
-let bass = new PercussionInstrument('url(' + "gif/4.gif" + ')','mp3_url');
-let davul = new PercussionInstrument('url(' + "gif/6.gif" + ')','mp3_url');
-let guitar = new StringInstrumet('url(' + "gif/7.gif" + ')','mp3_url');
-let saz = new StringInstrumet('url(' + "gif/8.gif" + ')','mp3_url');
-let pipe = new WindInstrument('url(' + "gif/9.gif" + ')','mp3_url');
-let sax = new WindInstrument('url(' + "gif/11.gif" + ')','mp3_url');
-let violin = new BowInstrument('url(' + "gif/13.gif" + ')','mp3_url'); // созданы инструменты
-
-
-let accordeonPlayer = new Man();
-let synthesizerPlayer = new Man();
-let bassPlayer = new Man();
-let davulPlayer = new Man();
-let guitarPlayer = new Man();
-let sazPlayer = new Man();
-let pipePlayer = new Man();
-let saxPlayer = new Man();
-let violinPlayer = new Man(); // созданы люди играющие на инструментах
-
-let womanDancer = new Woman();
-let manDancer = new Man(); //созданые танцоры
-
-let womanSinger = new Woman();
-let manSinger = new Man();// созданы певцы
-
-
-womanDancer.dance(womanDance.dance_file);
-manDancer.dance(manDance.dance_file); //заданы танцы для танцоров
-
-
-womanSinger.sing(womanSong.song_gif_file , womanSinger.song_mp3_file);
-manSinger.sing(manSong.song_gif_file,manSong.song_mp3_file); //заданы песни для певцов
-
-accordeonPlayer.playOnInstrument(accordeon.gif_file,accordeon.instument_mp3_file);
-synthesizerPlayer.playOnInstrument(synthesizer.gif_file,synthesizer.instument_mp3_file);
-bassPlayer.playOnInstrument(bass.gif_file,bassPlayer.instrument_mp3_file);
-davulPlayer.playOnInstrument(davul.gif_file,davul.instument_mp3_file);
-guitarPlayer.playOnInstrument(guitar.gif_file,guitar.instument_mp3_file);
-sazPlayer.playOnInstrument(saz.gif_file,saz.instument_mp3_file);
-pipePlayer.playOnInstrument(pipe.gif_file,pipe.instument_mp3_file);
-saxPlayer.playOnInstrument(sax.gif_file,sax.instument_mp3_file);
-violinPlayer.playOnInstrument(violin.gif_file,violin.instument_mp3_file); // заданы инструменты для музыкантов
