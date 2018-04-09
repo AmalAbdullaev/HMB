@@ -110,8 +110,7 @@ for (var _i2 = 0; _i2 < targets.length; _i2++) {
 function buttonInComparator(draggedId) {
     for (var index = 1; index <= 13; index++) {
         if ('box' + index == draggedId) {
-            document.getElementById('btnSolo' + index).style.display = 'block';
-            document.getElementById('btnOff' + index).style.display = 'block';
+            document.getElementById('btnBlock' + index).style.display = 'inline-flex';
         }
     }
 }
@@ -119,8 +118,7 @@ function buttonInComparator(draggedId) {
 function buttonOutComparator(draggedId) {
     for (var index = 1; index <= 13; index++) {
         if ('box' + index == draggedId) {
-            document.getElementById('btnSolo' + index).style.display = 'none';
-            document.getElementById('btnOff' + index).style.display = 'none';
+            document.getElementById('btnBlock' + index).style.display = 'none';
         }
     }
 }
@@ -327,10 +325,10 @@ saxPlayer.playOnInstrument(sax.gif_file, sax.instument_mp3_file);
 violinPlayer.playOnInstrument(violin.gif_file, violin.instument_mp3_file); // заданы инструменты для музыкантов
 
 
-// Вешаем обработчик клика на solo и off каждого участника
+// Вешаем обработчик клика на solo  каждого участника
 
 var _loop = function _loop(index) {
-    document.querySelector('#btnSolo' + index).addEventListener('click', function (e) {
+    document.querySelector('#btnSoloOn' + index).addEventListener('click', function (e) {
         var arr2 = arr.slice(0, arr.length);
 
         var elemIndex = arr2.indexOf('box' + index);
@@ -349,7 +347,7 @@ for (var index = 1; index <= 13; index++) {
 }
 
 var _loop2 = function _loop2(index) {
-    document.querySelector('#btnOff' + index).addEventListener('click', function (e) {
+    document.querySelector('#btnSoloOff' + index).addEventListener('click', function (e) {
         var arr2 = arr.slice(0, arr.length);
 
         var elemIndex = arr2.indexOf('box' + index);
@@ -362,6 +360,34 @@ var _loop2 = function _loop2(index) {
 for (var index = 1; index <= 13; index++) {
     _loop2(index);
 }
+// Вешаем обработчик клика на off  каждого участника
+
+var _loop3 = function _loop3(index) {
+    document.querySelector('#btnPause' + index).addEventListener('click', function (e) {
+        var arr2 = arr.slice(0, arr.length);
+
+        var elemIndex = arr2.indexOf('box' + index);
+        comparatorForOffOthers(arr2[elemIndex]);
+    });
+};
+
+for (var index = 1; index <= 13; index++) {
+    _loop3(index);
+}
+
+var _loop4 = function _loop4(index) {
+    document.querySelector('#btnPlay' + index).addEventListener('click', function (e) {
+        var arr2 = arr.slice(0, arr.length);
+
+        var elemIndex = arr2.indexOf('box' + index);
+        comparator(arr2[elemIndex]);
+    });
+};
+
+for (var index = 1; index <= 13; index++) {
+    _loop4(index);
+}
+
 function comparatorForOffOthers(draggedId) {
     if ('box1' == draggedId) {
         return manDancer.dance_gif_file;

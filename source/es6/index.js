@@ -109,8 +109,7 @@ for (let i = 0; i < targets.length; i++) {
 function buttonInComparator(draggedId){
     for (let index = 1; index <=13; index++) {
         if(('box'+index) == draggedId){
-            document.getElementById('btnSolo'+index).style.display = 'block';
-            document.getElementById('btnOff'+index).style.display = 'block';
+            document.getElementById('btnBlock'+index).style.display = 'inline-flex';
         }
     }
 }
@@ -118,8 +117,7 @@ function buttonInComparator(draggedId){
 function buttonOutComparator(draggedId){
     for (let index = 1; index <=13; index++) {
         if(('box'+index) == draggedId){
-            document.getElementById('btnSolo'+index).style.display = 'none';
-            document.getElementById('btnOff'+index).style.display = 'none';
+            document.getElementById('btnBlock'+index).style.display = 'none';
         }
     }
 }
@@ -333,9 +331,9 @@ saxPlayer.playOnInstrument(sax.gif_file,sax.instument_mp3_file);
 violinPlayer.playOnInstrument(violin.gif_file,violin.instument_mp3_file); // заданы инструменты для музыкантов
 
 
-// Вешаем обработчик клика на solo и off каждого участника
+// Вешаем обработчик клика на solo  каждого участника
 for (let index = 1; index <=13; index++) {
-    document.querySelector('#btnSolo'+index).addEventListener('click', function(e){ 
+    document.querySelector('#btnSoloOn'+index).addEventListener('click', function(e){ 
         let arr2 = arr.slice(0, arr.length);
 
         let elemIndex = arr2.indexOf('box'+index);
@@ -350,7 +348,7 @@ for (let index = 1; index <=13; index++) {
     });
 }
 for (let index = 1; index <=13; index++) {
-    document.querySelector('#btnOff'+index).addEventListener('click', function(e){ 
+    document.querySelector('#btnSoloOff'+index).addEventListener('click', function(e){ 
         let arr2 = arr.slice(0, arr.length);
 
         let elemIndex = arr2.indexOf('box'+index);
@@ -359,6 +357,26 @@ for (let index = 1; index <=13; index++) {
             }
     });
 }
+// Вешаем обработчик клика на off  каждого участника
+for (let index = 1; index <=13; index++) {
+    document.querySelector('#btnPause'+index).addEventListener('click', function(e){ 
+        let arr2 = arr.slice(0, arr.length);
+
+        let elemIndex = arr2.indexOf('box'+index);
+        comparatorForOffOthers(arr2[elemIndex]);
+    });
+}
+for (let index = 1; index <=13; index++) {
+    document.querySelector('#btnPlay'+index).addEventListener('click', function(e){ 
+        let arr2 = arr.slice(0, arr.length);
+
+        let elemIndex = arr2.indexOf('box'+index);
+        comparator(arr2[elemIndex]);
+    });
+}
+
+
+
 function comparatorForOffOthers(draggedId){
     if('box1' == draggedId){
         return manDancer.dance_gif_file;
