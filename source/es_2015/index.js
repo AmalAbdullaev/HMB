@@ -1,12 +1,66 @@
-"use strict";
+'use strict';
 
-var _Dancing = require("./Dancing.js");
+var _buttons = require('./buttons.js');
 
-var _Instrument = require("./Instrument.js");
+var _Dancing = require('./Dancing.js');
 
-var _Member = require("./Member.js");
+var _Instrument = require('./Instrument.js');
 
-var _Song = require("./Song.js");
+var _Member = require('./Member.js');
+
+var _Song = require('./Song.js');
+
+var manDance = new _Dancing.Dance('url(' + "gif/5.gif" + ')', 'url(' + "stopGif/1.jpg" + ')');
+var womanDance = new _Dancing.Dance('url(' + "gif/12.gif" + ')', 'url(' + "stopGif/1.jpg" + ')'); //созданы танцы
+
+var manSong = new _Song.Song('url(' + "gif/1.gif" + ')', 'music/boom.wav', 'url(' + "stopGif/1.jpg" + ')');
+var womanSong = new _Song.Song('url(' + "gif/10.gif" + ')', 'music/womsong.wav', 'url(' + "stopGif/1.jpg" + ')'); // созданы песни
+
+//сменить музыку 
+var accordeon = new _Instrument.KeyboardInstrument('url(' + "gif/2.gif" + ')', 'music/boom.wav', 'url(' + "stopGif/1.jpg" + ')');
+var synthesizer = new _Instrument.KeyboardInstrument('url(' + "gif/3.gif" + ')', 'music/clap.wav', 'url(' + "stopGif/1.jpg" + ')');
+var bass = new _Instrument.PercussionInstrument('url(' + "gif/4.gif" + ')', 'music/hihat.wav', 'url(' + "stopGif/1.jpg" + ')');
+var davul = new _Instrument.PercussionInstrument('url(' + "gif/6.gif" + ')', 'music/clap.wav', 'url(' + "stopGif/1.jpg" + ')');
+var guitar = new _Instrument.StringInstrumet('url(' + "gif/7.gif" + ')', 'music/kick.wav', 'url(' + "stopGif/1.jpg" + ')');
+var saz = new _Instrument.StringInstrumet('url(' + "gif/8.gif" + ')', 'music/tom.wav', 'url(' + "stopGif/1.jpg" + ')');
+var pipe = new _Instrument.WindInstrument('url(' + "gif/9.gif" + ')', 'music/kick.wav', 'url(' + "stopGif/1.jpg" + ')');
+var sax = new _Instrument.WindInstrument('url(' + "gif/11.gif" + ')', 'music/clap.wav', 'url(' + "stopGif/1.jpg" + ')');
+var violin = new _Instrument.BowInstrument('url(' + "gif/13.gif" + ')', 'music/boom.wav', 'url(' + "stopGif/1.jpg" + ')'); // созданы инструменты
+
+
+var accordeonPlayer = new _Member.Man();
+var synthesizerPlayer = new _Member.Man();
+var bassPlayer = new _Member.Man();
+var davulPlayer = new _Member.Man();
+var guitarPlayer = new _Member.Man();
+var sazPlayer = new _Member.Man();
+var pipePlayer = new _Member.Man();
+var saxPlayer = new _Member.Man();
+var violinPlayer = new _Member.Man(); // созданы люди играющие на инструментах
+
+var womanDancer = new _Member.Woman();
+var manDancer = new _Member.Man(); //созданые танцоры
+
+var womanSinger = new _Member.Woman();
+var manSinger = new _Member.Man(); // созданы певцы
+
+
+womanDancer.dance(womanDance.dance_file, womanDance.stopDanceGifFile);
+manDancer.dance(manDance.dance_file, manDance.stopDanceGifFile); //заданы танцы для танцоров
+
+womanSinger.sing(womanSong.song_gif_file, womanSong.song_mp3_file, womanSong.stopSongGifFile);
+manSinger.sing(manSong.song_gif_file, manSong.song_mp3_file, manSong.stopSongGifFile); //заданы песни для певцов
+
+accordeonPlayer.playOnInstrument(accordeon.gif_file, accordeon.instument_mp3_file, accordeon.stopGif);
+synthesizerPlayer.playOnInstrument(synthesizer.gif_file, synthesizer.instument_mp3_file, synthesizer.stopGif);
+bassPlayer.playOnInstrument(bass.gif_file, bass.instument_mp3_file, bass.stopGif);
+davulPlayer.playOnInstrument(davul.gif_file, davul.instument_mp3_file, davul.stopGif);
+guitarPlayer.playOnInstrument(guitar.gif_file, guitar.instument_mp3_file, guitar.stopGif);
+sazPlayer.playOnInstrument(saz.gif_file, saz.instument_mp3_file, saz.stopGif);
+pipePlayer.playOnInstrument(pipe.gif_file, pipe.instument_mp3_file, pipe.stopGif);
+saxPlayer.playOnInstrument(sax.gif_file, sax.instument_mp3_file, sax.stopGif);
+violinPlayer.playOnInstrument(violin.gif_file, violin.instument_mp3_file, violin.stopGif); // заданы инструменты для музыкантов
+
 
 function handleDragStart(e) {
     e.dataTransfer.setData("text", this.id);
@@ -48,9 +102,9 @@ function handleOverDrop(e) {
     draggedEl.style.width = width2(draggedId);
     draggedEl.style.height = '400px';
     draggedEl.style.float = 'inherit';
-    draggedEl.style.backgroundImage = comparator2(draggedId);
+    draggedEl.style.backgroundImage = getIcon(draggedId);
 
-    buttonOutComparator(draggedId);
+    (0, _buttons.closeButtons)(draggedId);
 
     arr.pop();
 }
@@ -81,8 +135,9 @@ function handleOverDrop2(e) {
     draggedEl.style.width = '450px';
     draggedEl.style.height = '450px';
 
-    draggedEl.style.backgroundImage = comparator(draggedId);
-    buttonInComparator(draggedId);
+    draggedEl.style.backgroundImage = activation(draggedId);
+
+    (0, _buttons.openButtons)(draggedId);
 
     arr.push(draggedId);
 }
@@ -107,23 +162,8 @@ for (var _i2 = 0; _i2 < targets.length; _i2++) {
     targets2[_i2].addEventListener("dragleave", handleDragEnterLeave);
 }
 
-function buttonInComparator(draggedId) {
-    for (var index = 1; index <= 13; index++) {
-        if ('box' + index == draggedId) {
-            document.getElementById('btnBlock' + index).style.display = 'inline-flex';
-        }
-    }
-}
-
-function buttonOutComparator(draggedId) {
-    for (var index = 1; index <= 13; index++) {
-        if ('box' + index == draggedId) {
-            document.getElementById('btnBlock' + index).style.display = 'none';
-        }
-    }
-}
-
-function comparator(draggedId) {
+//активации участника
+function activation(draggedId) {
     if ('box1' == draggedId) {
         return manDancer.dance_gif_file;
     }
@@ -175,51 +215,8 @@ function comparator(draggedId) {
         return synthesizerPlayer.instrument_gif;
     }
 }
-// метод возврщает иконки в исходном размере (дроп вниз), 
-// когда иконки все будут одного размера нужно убрать этот метод
-function width2(draggedId) {
-    if ('box1' == draggedId) {
-        return '300px';
-    }
-    if ('box2' == draggedId) {
-        return '250px';
-    }
-    if ('box3' == draggedId) {
-        return '300px';
-    }
-    if ('box4' == draggedId) {
-        return '213px';
-    }
-    if ('box5' == draggedId) {
-        return '500px';
-    }
-    if ('box6' == draggedId) {
-        return '213px';
-    }
-    if ('box7' == draggedId) {
-        return '350px';
-    }
-    if ('box8' == draggedId) {
-        return '413px';
-    }
-    if ('box9' == draggedId) {
-        return '400px';
-    }
-    if ('box10' == draggedId) {
-        return '400px';
-    }
-    if ('box11' == draggedId) {
-        return '400px';
-    }
-    if ('box12' == draggedId) {
-        return '500px';
-    }
-    if ('box13' == draggedId) {
-        return '400px';
-    }
-}
 
-function comparator2(draggedId) {
+function getIcon(draggedId) {
     if ('box1' == draggedId) {
         return 'url(' + "icons/icoHalpah.png" + ')';
     }
@@ -272,171 +269,165 @@ function comparator2(draggedId) {
     }
 }
 
-var manDance = new _Dancing.Dance('url(' + "gif/5.gif" + ')');
-var womanDance = new _Dancing.Dance('url(' + "gif/12.gif" + ')'); //созданы танцы
+//обработчики кнопок solo(on-off) and play(on-off)
+(function () {
+    var _loop = function _loop(index) {
+        document.querySelector('#btnSoloOn' + index).addEventListener('click', function (e) {
+            var arr2 = arr.slice(0, arr.length);
 
-var manSong = new _Song.Song('url(' + "gif/1.gif" + ')', 'music/boom.wav');
-var womanSong = new _Song.Song('url(' + "gif/10.gif" + ')', 'music/womsong.wav'); // созданы песни
-
-//сменить музыку 
-var accordeon = new _Instrument.KeyboardInstrument('url(' + "gif/2.gif" + ')', 'music/boom.wav');
-var synthesizer = new _Instrument.KeyboardInstrument('url(' + "gif/3.gif" + ')', 'music/clap.wav');
-var bass = new _Instrument.PercussionInstrument('url(' + "gif/4.gif" + ')', 'music/hihat.wav');
-var davul = new _Instrument.PercussionInstrument('url(' + "gif/6.gif" + ')', 'music/clap.wav');
-var guitar = new _Instrument.StringInstrumet('url(' + "gif/7.gif" + ')', 'music/kick.wav');
-var saz = new _Instrument.StringInstrumet('url(' + "gif/8.gif" + ')', 'music/tom.wav');
-var pipe = new _Instrument.WindInstrument('url(' + "gif/9.gif" + ')', 'music/kick.wav');
-var sax = new _Instrument.WindInstrument('url(' + "gif/11.gif" + ')', 'music/clap.wav');
-var violin = new _Instrument.BowInstrument('url(' + "gif/13.gif" + ')', 'music/boom.wav'); // созданы инструменты
-
-
-var accordeonPlayer = new _Member.Man();
-var synthesizerPlayer = new _Member.Man();
-var bassPlayer = new _Member.Man();
-var davulPlayer = new _Member.Man();
-var guitarPlayer = new _Member.Man();
-var sazPlayer = new _Member.Man();
-var pipePlayer = new _Member.Man();
-var saxPlayer = new _Member.Man();
-var violinPlayer = new _Member.Man(); // созданы люди играющие на инструментах
-
-var womanDancer = new _Member.Woman();
-var manDancer = new _Member.Man(); //созданые танцоры
-
-var womanSinger = new _Member.Woman();
-var manSinger = new _Member.Man(); // созданы певцы
-
-
-womanDancer.dance(womanDance.dance_file);
-manDancer.dance(manDance.dance_file); //заданы танцы для танцоров
-
-
-womanSinger.sing(womanSong.song_gif_file, womanSong.song_mp3_file);
-manSinger.sing(manSong.song_gif_file, manSong.song_mp3_file); //заданы песни для певцов
-
-accordeonPlayer.playOnInstrument(accordeon.gif_file, accordeon.instument_mp3_file);
-synthesizerPlayer.playOnInstrument(synthesizer.gif_file, synthesizer.instument_mp3_file);
-bassPlayer.playOnInstrument(bass.gif_file, bass.instument_mp3_file);
-davulPlayer.playOnInstrument(davul.gif_file, davul.instument_mp3_file);
-guitarPlayer.playOnInstrument(guitar.gif_file, guitar.instument_mp3_file);
-sazPlayer.playOnInstrument(saz.gif_file, saz.instument_mp3_file);
-pipePlayer.playOnInstrument(pipe.gif_file, pipe.instument_mp3_file);
-saxPlayer.playOnInstrument(sax.gif_file, sax.instument_mp3_file);
-violinPlayer.playOnInstrument(violin.gif_file, violin.instument_mp3_file); // заданы инструменты для музыкантов
-
-
-// Вешаем обработчик клика на solo  каждого участника
-
-var _loop = function _loop(index) {
-    document.querySelector('#btnSoloOn' + index).addEventListener('click', function (e) {
-        var arr2 = arr.slice(0, arr.length);
-
-        var elemIndex = arr2.indexOf('box' + index);
-        for (var _index = 0; _index < arr2.length; _index++) {
-            if (_index != elemIndex) {
-                comparatorForOffOthers(arr2[_index]);
-            } else {
-                comparator(arr2[_index]);
+            var elemIndex = arr2.indexOf('box' + index);
+            for (var _index = 0; _index < arr2.length; _index++) {
+                if (_index != elemIndex) {
+                    pause(arr2[_index]);
+                } else {
+                    activation(arr2[_index]);
+                }
             }
-        }
-    });
-};
+        });
+    };
 
-for (var index = 1; index <= 13; index++) {
-    _loop(index);
-}
+    // Вешаем обработчик клика на solo  каждого участника
+    for (var index = 1; index <= 13; index++) {
+        _loop(index);
+    }
 
-var _loop2 = function _loop2(index) {
-    document.querySelector('#btnSoloOff' + index).addEventListener('click', function (e) {
-        var arr2 = arr.slice(0, arr.length);
+    var _loop2 = function _loop2(index) {
+        document.querySelector('#btnSoloOff' + index).addEventListener('click', function (e) {
+            var arr2 = arr.slice(0, arr.length);
 
-        var elemIndex = arr2.indexOf('box' + index);
-        for (var _index2 = 0; _index2 < arr2.length; _index2++) {
-            comparator(arr2[_index2]);
-        }
-    });
-};
+            var elemIndex = arr2.indexOf('box' + index);
+            for (var _index2 = 0; _index2 < arr2.length; _index2++) {
+                activation(arr2[_index2]);
+            }
+        });
+    };
 
-for (var index = 1; index <= 13; index++) {
-    _loop2(index);
-}
-// Вешаем обработчик клика на off  каждого участника
+    for (var index = 1; index <= 13; index++) {
+        _loop2(index);
+    }
+    // Вешаем обработчик клика на off  каждого участника
 
-var _loop3 = function _loop3(index) {
-    document.querySelector('#btnPause' + index).addEventListener('click', function (e) {
-        var arr2 = arr.slice(0, arr.length);
+    var _loop3 = function _loop3(index) {
+        document.querySelector('#btnPause' + index).addEventListener('click', function (e) {
+            var arr2 = arr.slice(0, arr.length);
 
-        var elemIndex = arr2.indexOf('box' + index);
-        comparatorForOffOthers(arr2[elemIndex]);
-    });
-};
+            var elemIndex = arr2.indexOf('box' + index);
+            pause(arr2[elemIndex]);
+        });
+    };
 
-for (var index = 1; index <= 13; index++) {
-    _loop3(index);
-}
+    for (var index = 1; index <= 13; index++) {
+        _loop3(index);
+    }
 
-var _loop4 = function _loop4(index) {
-    document.querySelector('#btnPlay' + index).addEventListener('click', function (e) {
-        var arr2 = arr.slice(0, arr.length);
+    var _loop4 = function _loop4(index) {
+        document.querySelector('#btnPlay' + index).addEventListener('click', function (e) {
+            var arr2 = arr.slice(0, arr.length);
 
-        var elemIndex = arr2.indexOf('box' + index);
-        comparator(arr2[elemIndex]);
-    });
-};
+            var elemIndex = arr2.indexOf('box' + index);
+            activation(arr2[elemIndex]);
+        });
+    };
 
-for (var index = 1; index <= 13; index++) {
-    _loop4(index);
-}
+    for (var index = 1; index <= 13; index++) {
+        _loop4(index);
+    }
+})();
 
-function comparatorForOffOthers(draggedId) {
+//отключает участников
+function pause(draggedId) {
     if ('box1' == draggedId) {
-        return manDancer.dance_gif_file;
+        return manDancer.stop_dance_gif_file;
     }
     if ('box2' == draggedId) {
-        return womanDancer.dance_gif_file;
+        return womanDancer.stop_dance_gif_file;
     }
     if ('box3' == draggedId) {
         manSinger.pausePlaySong();
-        return manSinger.song_gif;
+        return manSinger.stop_song_gif_file;
     }
     if ('box4' == draggedId) {
         womanSinger.pausePlaySong();
-        return womanSinger.song_gif;
+        return womanSinger.stop_song_gif_file;
     }
     if ('box5' == draggedId) {
         accordeonPlayer.pause();
-        return accordeonPlayer.instrument_gif;
+        return accordeonPlayer.stopPlayOnInstrumentGifFile;
     }
     if ('box6' == draggedId) {
         bassPlayer.pause();
-        return bassPlayer.instrument_gif;
+        return bassPlayer.stopPlayOnInstrumentGifFile;
     }
     if ('box7' == draggedId) {
         davulPlayer.pause();
-        return davulPlayer.instrument_gif;
+        return davulPlayer.stopPlayOnInstrumentGifFile;
     }
     if ('box8' == draggedId) {
         guitarPlayer.pause();
-        return guitarPlayer.instrument_gif;
+        return guitarPlayer.stopPlayOnInstrumentGifFile;
     }
     if ('box9' == draggedId) {
         violinPlayer.pause();
-        return violinPlayer.instrument_gif;
+        return violinPlayer.stopPlayOnInstrumentGifFile;
     }
     if ('box10' == draggedId) {
         pipePlayer.pause();
-        return pipePlayer.instrument_gif;
+        return pipePlayer.stopPlayOnInstrumentGifFile;
     }
     if ('box11' == draggedId) {
         saxPlayer.pause();
-        return saxPlayer.instrument_gif;
+        return saxPlayer.stopPlayOnInstrumentGifFile;
     }
     if ('box12' == draggedId) {
         sazPlayer.pause();
-        return sazPlayer.instrument_gif;
+        return sazPlayer.stopPlayOnInstrumentGifFile;
     }
     if ('box13' == draggedId) {
         synthesizerPlayer.pause();
-        return synthesizerPlayer.instrument_gif;
+        return synthesizerPlayer.stopPlayOnInstrumentGifFile;
+    }
+}
+
+// метод возврщает иконки в исходном размере (дроп вниз), 
+// когда иконки все будут одного размера нужно убрать этот метод
+function width2(draggedId) {
+    if ('box1' == draggedId) {
+        return '300px';
+    }
+    if ('box2' == draggedId) {
+        return '250px';
+    }
+    if ('box3' == draggedId) {
+        return '300px';
+    }
+    if ('box4' == draggedId) {
+        return '213px';
+    }
+    if ('box5' == draggedId) {
+        return '500px';
+    }
+    if ('box6' == draggedId) {
+        return '213px';
+    }
+    if ('box7' == draggedId) {
+        return '350px';
+    }
+    if ('box8' == draggedId) {
+        return '413px';
+    }
+    if ('box9' == draggedId) {
+        return '400px';
+    }
+    if ('box10' == draggedId) {
+        return '400px';
+    }
+    if ('box11' == draggedId) {
+        return '400px';
+    }
+    if ('box12' == draggedId) {
+        return '500px';
+    }
+    if ('box13' == draggedId) {
+        return '400px';
     }
 }
