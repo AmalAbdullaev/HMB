@@ -7,19 +7,19 @@ import {Song} from './Song.js';
 let manDance = new Dance('url(' + "gif/5.gif" + ')','url(' + "stopGif/1.jpg" + ')');
 let womanDance = new Dance('url(' + "gif/12.gif" + ')','url(' + "stopGif/1.jpg" + ')');//созданы танцы
 
-let manSong = new Song('music/boom.wav');
+let manSong = new Song('music/womsong.wav');
 let womanSong = new Song('music/womsong.wav'); // созданы песни
 
 //сменить музыку 
-let accordeon = new KeyboardInstrument('music/boom.wav');
-let synthesizer = new KeyboardInstrument('music/clap.wav');
-let bass = new PercussionInstrument('music/hihat.wav');
-let davul = new PercussionInstrument('music/clap.wav');
-let guitar = new StringInstrumet('music/kick.wav');
-let saz = new StringInstrumet('music/tom.wav');
-let pipe = new WindInstrument('music/kick.wav');
-let sax = new WindInstrument('music/clap.wav');
-let violin = new BowInstrument('music/boom.wav'); // созданы инструменты
+let accordeon = new KeyboardInstrument('music/accordeon.mp3');
+let synthesizer = new KeyboardInstrument('music/synthesizer.mp3');
+let bass = new PercussionInstrument('music/bass.mp3');
+let davul = new PercussionInstrument('music/davul.mp3');
+let guitar = new StringInstrumet('music/guitar.mp3');
+let saz = new StringInstrumet('music/saz.mp3');
+let pipe = new WindInstrument('music/pipe.mp3');
+let sax = new WindInstrument('music/sax.mp3');
+let violin = new BowInstrument('music/violin.mp3'); // созданы инструменты
 
 let womanDancer = new WomanDancer(womanDance);
 let manDancer = new ManDancer(manDance); //созданые танцоры
@@ -85,8 +85,8 @@ function handleOverDrop(e) {
 
     
     closeButtons(draggedId);
-
-    arr.pop();
+    let del = arr.indexOf(draggedId);
+    arr.splice(del,1);
 
 }
 
@@ -245,11 +245,11 @@ function getIcon(draggedId){
         return 'url(' + "icons/icoFes.png" + ')';
     }
     if('box3' == draggedId){
-        manSinger.pausePlaySong();
+        manSinger.pause();
         return 'url(' + "icons/icoMicroH.png" + ')';
     }
     if('box4' == draggedId){
-        womanSinger.pausePlaySong();
+        womanSinger.pause();
         return 'url(' + "icons/icoMicroF.png" + ')';
     }
     if('box5' == draggedId){
@@ -293,52 +293,41 @@ function getIcon(draggedId){
 //обработчики кнопок solo(on-off) and play(on-off)
 (function (){
     // Вешаем обработчик клика на solo  каждого участника
-    for (let index = 1; index <=13; index++) {
-        document.querySelector('#btnSoloOn'+index).addEventListener('click', function(e){ 
-            let arr2 = arr.slice(0, arr.length);
-    
-            let elemIndex = arr2.indexOf('box'+index);
-            for (let index = 0; index < arr2.length; index++) {
+    for (let i = 1; i <=13; i++) {
+        document.querySelector('#btnSoloOn'+i).addEventListener('click', function(e){ 
+            let elemIndex = arr.indexOf('box'+i);
+            for (let index = 0; index < arr.length; index++){
+                let elem = document.getElementById(arr[index]);
                     if(index!=elemIndex){
-                        let elem = document.getElementById(arr2[index]);
-                        elem.style.backgroundImage = pause(arr2[index]);
+                        elem.style.backgroundImage = pause(arr[index]);
                     }else{
-                        let elem = document.getElementById(arr2[index]);
-                        elem.style.backgroundImage = activation(arr2[index]);
+                        elem.style.backgroundImage = activation(arr[index]);
                     }
-    
                 }
         });
     }
     
-    for (let index = 1; index <=13; index++) {
-        document.querySelector('#btnSoloOff'+index).addEventListener('click', function(e){ 
-            let arr2 = arr.slice(0, arr.length);
-    
-            let elemIndex = arr2.indexOf('box'+index);
-            for (let index = 0; index < arr2.length; index++) {
-                let elem = document.getElementById(arr2[index]);
-                elem.style.backgroundImage = activation(arr2[index]);
-                }
+    for (let i = 1; i <=13; i++) {
+        document.querySelector('#btnSoloOff'+i).addEventListener('click', function(e){ 
+            for (let index = 0; index < arr.length; index++) {
+                let elem = document.getElementById(arr[index]);
+                elem.style.backgroundImage = activation(arr[index]);
+            }
         });
     }
-    // Вешаем обработчик клика на off  каждого участника
+    // Вешаем обработчик клика на play and pause  каждого участника
     for (let index = 1; index <=13; index++) {
         document.querySelector('#btnPause'+index).addEventListener('click', function(e){ 
-            let arr2 = arr.slice(0, arr.length);
-    
-            let elemIndex = arr2.indexOf('box'+index);
-            let elem = document.getElementById(arr2[elemIndex]);
-            elem.style.backgroundImage = pause(arr2[elemIndex]);
+            let elemIndex = arr.indexOf('box'+index);
+            let elem = document.getElementById(arr[elemIndex]);
+            elem.style.backgroundImage = pause(arr[elemIndex]);
         });
     }
     for (let index = 1; index <=13; index++) {
         document.querySelector('#btnPlay'+index).addEventListener('click', function(e){ 
-            let arr2 = arr.slice(0, arr.length);
-    
-            let elemIndex = arr2.indexOf('box'+index);
-            let elem = document.getElementById(arr2[elemIndex]);
-            elem.style.backgroundImage = activation(arr2[elemIndex]);
+            let elemIndex = arr.indexOf('box'+index);
+            let elem = document.getElementById(arr[elemIndex]);
+            elem.style.backgroundImage = activation(arr[elemIndex]);
         });
     }
 })();
