@@ -87,7 +87,6 @@ function handleOverDrop(e) {
     closeButtons(draggedId);
     let del = arr.indexOf(draggedId);
     arr.splice(del,1);
-
 }
 
 function handleOverDrop2(e) {
