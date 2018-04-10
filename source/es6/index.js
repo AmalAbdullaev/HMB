@@ -85,9 +85,8 @@ function handleOverDrop(e) {
 
     
     closeButtons(draggedId);
-
-    arr.pop();
-
+    let del = arr.indexOf(draggedId);
+    arr.splice(del,1);
 }
 
 function handleOverDrop2(e) {
@@ -293,52 +292,41 @@ function getIcon(draggedId){
 //обработчики кнопок solo(on-off) and play(on-off)
 (function (){
     // Вешаем обработчик клика на solo  каждого участника
-    for (let index = 1; index <=13; index++) {
-        document.querySelector('#btnSoloOn'+index).addEventListener('click', function(e){ 
-            let arr2 = arr.slice(0, arr.length);
-    
-            let elemIndex = arr2.indexOf('box'+index);
-            for (let index = 0; index < arr2.length; index++) {
+    for (let i = 1; i <=13; i++) {
+        document.querySelector('#btnSoloOn'+i).addEventListener('click', function(e){ 
+            let elemIndex = arr.indexOf('box'+i);
+            for (let index = 0; index < arr.length; index++){
+                let elem = document.getElementById(arr[index]);
                     if(index!=elemIndex){
-                        let elem = document.getElementById(arr2[index]);
-                        elem.style.backgroundImage = pause(arr2[index]);
+                        elem.style.backgroundImage = pause(arr[index]);
                     }else{
-                        let elem = document.getElementById(arr2[index]);
-                        elem.style.backgroundImage = activation(arr2[index]);
+                        elem.style.backgroundImage = activation(arr[index]);
                     }
-    
                 }
         });
     }
     
-    for (let index = 1; index <=13; index++) {
-        document.querySelector('#btnSoloOff'+index).addEventListener('click', function(e){ 
-            let arr2 = arr.slice(0, arr.length);
-    
-            let elemIndex = arr2.indexOf('box'+index);
-            for (let index = 0; index < arr2.length; index++) {
-                let elem = document.getElementById(arr2[index]);
-                elem.style.backgroundImage = activation(arr2[index]);
-                }
+    for (let i = 1; i <=13; i++) {
+        document.querySelector('#btnSoloOff'+i).addEventListener('click', function(e){ 
+            for (let index = 0; index < arr.length; index++) {
+                let elem = document.getElementById(arr[index]);
+                elem.style.backgroundImage = activation(arr[index]);
+            }
         });
     }
-    // Вешаем обработчик клика на off  каждого участника
+    // Вешаем обработчик клика на play and pause  каждого участника
     for (let index = 1; index <=13; index++) {
         document.querySelector('#btnPause'+index).addEventListener('click', function(e){ 
-            let arr2 = arr.slice(0, arr.length);
-    
-            let elemIndex = arr2.indexOf('box'+index);
-            let elem = document.getElementById(arr2[elemIndex]);
-            elem.style.backgroundImage = pause(arr2[elemIndex]);
+            let elemIndex = arr.indexOf('box'+index);
+            let elem = document.getElementById(arr[elemIndex]);
+            elem.style.backgroundImage = pause(arr[elemIndex]);
         });
     }
     for (let index = 1; index <=13; index++) {
         document.querySelector('#btnPlay'+index).addEventListener('click', function(e){ 
-            let arr2 = arr.slice(0, arr.length);
-    
-            let elemIndex = arr2.indexOf('box'+index);
-            let elem = document.getElementById(arr2[elemIndex]);
-            elem.style.backgroundImage = activation(arr2[elemIndex]);
+            let elemIndex = arr.indexOf('box'+index);
+            let elem = document.getElementById(arr[elemIndex]);
+            elem.style.backgroundImage = activation(arr[elemIndex]);
         });
     }
 })();

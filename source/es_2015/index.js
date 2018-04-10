@@ -88,8 +88,8 @@ function handleOverDrop(e) {
     draggedEl.style.backgroundImage = getIcon(draggedId);
 
     (0, _buttons.closeButtons)(draggedId);
-
-    arr.pop();
+    var del = arr.indexOf(draggedId);
+    arr.splice(del, 1);
 }
 
 function handleOverDrop2(e) {
@@ -290,71 +290,57 @@ function getIcon(draggedId) {
 
 //обработчики кнопок solo(on-off) and play(on-off)
 (function () {
-    var _loop = function _loop(index) {
-        document.querySelector('#btnSoloOn' + index).addEventListener('click', function (e) {
-            var arr2 = arr.slice(0, arr.length);
-
-            var elemIndex = arr2.indexOf('box' + index);
-            for (var _index = 0; _index < arr2.length; _index++) {
-                if (_index != elemIndex) {
-                    var elem = document.getElementById(arr2[_index]);
-                    elem.style.backgroundImage = pause(arr2[_index]);
+    var _loop = function _loop(i) {
+        document.querySelector('#btnSoloOn' + i).addEventListener('click', function (e) {
+            var elemIndex = arr.indexOf('box' + i);
+            for (var index = 0; index < arr.length; index++) {
+                var elem = document.getElementById(arr[index]);
+                if (index != elemIndex) {
+                    elem.style.backgroundImage = pause(arr[index]);
                 } else {
-                    var _elem = document.getElementById(arr2[_index]);
-                    _elem.style.backgroundImage = activation(arr2[_index]);
+                    elem.style.backgroundImage = activation(arr[index]);
                 }
             }
         });
     };
 
     // Вешаем обработчик клика на solo  каждого участника
-    for (var index = 1; index <= 13; index++) {
-        _loop(index);
+    for (var i = 1; i <= 13; i++) {
+        _loop(i);
     }
 
-    var _loop2 = function _loop2(index) {
-        document.querySelector('#btnSoloOff' + index).addEventListener('click', function (e) {
-            var arr2 = arr.slice(0, arr.length);
-
-            var elemIndex = arr2.indexOf('box' + index);
-            for (var _index2 = 0; _index2 < arr2.length; _index2++) {
-                var elem = document.getElementById(arr2[_index2]);
-                elem.style.backgroundImage = activation(arr2[_index2]);
+    for (var i = 1; i <= 13; i++) {
+        document.querySelector('#btnSoloOff' + i).addEventListener('click', function (e) {
+            for (var index = 0; index < arr.length; index++) {
+                var elem = document.getElementById(arr[index]);
+                elem.style.backgroundImage = activation(arr[index]);
             }
+        });
+    }
+    // Вешаем обработчик клика на play and pause  каждого участника
+
+    var _loop2 = function _loop2(index) {
+        document.querySelector('#btnPause' + index).addEventListener('click', function (e) {
+            var elemIndex = arr.indexOf('box' + index);
+            var elem = document.getElementById(arr[elemIndex]);
+            elem.style.backgroundImage = pause(arr[elemIndex]);
         });
     };
 
     for (var index = 1; index <= 13; index++) {
         _loop2(index);
     }
-    // Вешаем обработчик клика на off  каждого участника
 
     var _loop3 = function _loop3(index) {
-        document.querySelector('#btnPause' + index).addEventListener('click', function (e) {
-            var arr2 = arr.slice(0, arr.length);
-
-            var elemIndex = arr2.indexOf('box' + index);
-            var elem = document.getElementById(arr2[elemIndex]);
-            elem.style.backgroundImage = pause(arr2[elemIndex]);
+        document.querySelector('#btnPlay' + index).addEventListener('click', function (e) {
+            var elemIndex = arr.indexOf('box' + index);
+            var elem = document.getElementById(arr[elemIndex]);
+            elem.style.backgroundImage = activation(arr[elemIndex]);
         });
     };
 
     for (var index = 1; index <= 13; index++) {
         _loop3(index);
-    }
-
-    var _loop4 = function _loop4(index) {
-        document.querySelector('#btnPlay' + index).addEventListener('click', function (e) {
-            var arr2 = arr.slice(0, arr.length);
-
-            var elemIndex = arr2.indexOf('box' + index);
-            var elem = document.getElementById(arr2[elemIndex]);
-            elem.style.backgroundImage = activation(arr2[elemIndex]);
-        });
-    };
-
-    for (var index = 1; index <= 13; index++) {
-        _loop4(index);
     }
 })();
 
