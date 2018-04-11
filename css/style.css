@@ -1,29 +1,33 @@
 h2 {
     color: #a7a3a4;
-    margin-left: 80px;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
 }
 
 [data-drop-target] {
-    height: 800px;
-    width: 2800px;
-    margin: 55px;
+    height: 50%;
+    width: 90%;
+    margin-left: 50px;
+    margin-right: 50px;
     float:left;
     border: 4px double black;
     border-color: rgb(0, 255, 213); 
-    border-width: 20px;
+    border-width: 0px;
 }
 
 [data-drop-target2] {
     height: 500px;
-    width: 2850px;
-    margin-left: 55px;
+    width: 100%;
+    margin-left: 50px;
+    margin-right: 50px;
     background-color: gainsboro;
     float:left;
 }
 
 .window {
-    height: 500px;
-    width: 800px;
+    height: 100%;
+    width: 100%;
 }
 
 .drag-enter {
@@ -42,97 +46,97 @@ h2 {
 
 .danceMan {
     background-image: url("../icons/icoHalpah.png");
-    height: 400px;
-    width: 300px;
+    height: 200px;
+    width: 200px;
     background-repeat: no-repeat;
     background-position: center; 
 }
 
 .danceGirl {
     background-image: url("../icons/icoFes.png");
-    height: 400px;
-    width: 250px;
+    height: 200px;
+    width: 200px;
     background-repeat: no-repeat;
     background-position: center; 
 }
 
 .singerMan {
     background-image: url("../icons/icoMicroH.png");
-    height: 400px;
-    width: 300px;
+    height: 200px;
+    width: 200px;
     background-repeat: no-repeat;
     background-position: center; 
 }
 .singerGirl {
     background-image: url("../icons/icoMicroF.png");
-    height: 400px;
-    width: 213px;
+    height: 200px;
+    width: 200px;
     background-repeat: no-repeat;
     background-position: center; 
 }
 
 .accordeon {
     background-image: url("../icons/icoMusicAccordeon.png");
-    height: 400px;
-    width: 500px;
+    height: 200px;
+    width: 200px;
     background-repeat: no-repeat;
     background-position: center; 
 
 }
 .bass {
     background-image: url("../icons/icoMusicBass.png");
-    height: 400px;
-    width: 213px;
+    height: 200px;
+    width: 200px;
     background-position: center; 
     background-repeat: no-repeat;
 }
 .davul {
     background-image: url("../icons/icoMusicDavul.png");
-    height: 400px;
-    width: 350px;
+    height: 200px;
+    width: 200px;
     background-position: center; 
     background-repeat: no-repeat;
 }
 .guitar {
     background-image: url("../icons/icoMusicGuitar.png");
-    height: 400px;
-    width: 413px;
+    height: 200px;
+    width: 200px;
     background-position: center; 
     background-repeat: no-repeat;
 }
 .pipe {
     background-image: url("../icons/icoMusicPipe.png");
-    height: 400px;
-    width: 400px;
+    height: 200px;
+    width: 200px;
     background-position: center; 
     background-repeat: no-repeat;
 }
 .sax {
     background-image: url("../icons/icoMusicSax.png");
-    height: 400px;
-    width: 400px;
+    height: 200px;
+    width: 200px;
     background-repeat: no-repeat;
     background-position: center; 
 }
 
 .saz {
     background-image: url("../icons/icoMusicSaz.png");
-    height: 400px;
-    width: 400px;
+    height: 200px;
+    width: 200px;
     background-position: center; 
     background-repeat: no-repeat;
 }
 .synthesizer {
     background-image: url("../icons/icoMusicSynthesizer.png");
-    height: 400px;
-    width: 500px;
+    height: 200px;
+    width: 200px;
     background-position: center; 
     background-repeat: no-repeat;
 }
 .violin {
     background-image: url("../icons/icoMusicViolin.png");
-    height: 400px;
-    width: 400px;
+    height: 200px;
+    width: 200px;
     background-position: center; 
     background-repeat: no-repeat;
 }

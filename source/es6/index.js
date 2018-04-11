@@ -78,8 +78,8 @@ function handleOverDrop(e) {
     this.className = "";
     
     //убрать потом  width and height
-    draggedEl.style.width = width2(draggedId);
-    draggedEl.style.height = '400px';
+    draggedEl.style.width = '200px';
+    draggedEl.style.height = '200px';
     draggedEl.style.float = 'inherit';
     draggedEl.style.backgroundImage = getIcon(draggedId);
 
@@ -114,6 +114,7 @@ function handleOverDrop2(e) {
     this.appendChild(draggedEl);
     this.className = "";
     
+    //задать размер гифок
     draggedEl.style.width = '450px';
     draggedEl.style.height = '450px'; 
 
@@ -330,47 +331,3 @@ function getIcon(draggedId){
         });
     }
 })();
-
-// метод возврщает иконки в исходном размере (дроп вниз), 
-// когда иконки все будут одного размера нужно убрать этот метод
-function width2(draggedId){
-    if('box1' == draggedId){
-        return '300px';
-    }
-    if('box2' == draggedId){
-        return '250px';
-    }
-    if('box3' == draggedId){
-        return '300px';
-    }
-    if('box4' == draggedId){
-        return '213px';
-    }
-    if('box5' == draggedId){
-        return '500px';
-    }
-    if('box6' == draggedId){
-        return '213px';
-    }
-    if('box7' == draggedId){
-        return '350px';
-    }
-    if('box8' == draggedId){
-        return '413px';
-    }
-    if('box9' == draggedId){
-        return '400px';
-    }
-    if('box10' == draggedId){
-        return '400px';
-    }
-    if('box11' == draggedId){
-        return '400px';
-    }
-    if('box12' == draggedId){
-        return '500px';
-    }
-    if('box13' == draggedId){
-        return '400px';
-    }
-}
