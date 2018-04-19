@@ -10,10 +10,10 @@ var _Member = require('./Member.js');
 
 var _Song = require('./Song.js');
 
-var manDance = new _Dancing.Dance('url(' + "gif/5.gif" + ')', 'url(' + "stopGif/1.jpg" + ')');
-var womanDance = new _Dancing.Dance('url(' + "gif/12.gif" + ')', 'url(' + "stopGif/1.jpg" + ')'); //созданы танцы
+var manDance = new _Dancing.Dance('url(' + "gif/manDance.gif" + ')', 'url(' + "stopGif/manDance.jpg" + ')');
+var womanDance = new _Dancing.Dance('url(' + "gif/womanDance.gif" + ')', 'url(' + "stopGif/womanDance.jpg" + ')'); //созданы танцы
 
-var manSong = new _Song.Song('music/womsong.wav');
+var manSong = new _Song.Song('music/mansong.mp3');
 var womanSong = new _Song.Song('music/womsong.wav'); // созданы песни
 
 //сменить музыку 
@@ -30,18 +30,18 @@ var violin = new _Instrument.BowInstrument('music/violin.mp3'); // создан�
 var womanDancer = new _Member.WomanDancer(womanDance);
 var manDancer = new _Member.ManDancer(manDance); //созданые танцоры
 
-var womanSinger = new _Member.WomanSinger(womanSong, 'url(' + "gif/1.gif" + ')', 'url(' + "stopGif/1.jpg" + ')');
-var manSinger = new _Member.ManSinger(manSong, 'url(' + "gif/2.gif" + ')', 'url(' + "stopGif/1.jpg" + ')'); // созданы певцы
+var womanSinger = new _Member.WomanSinger(womanSong, 'url(' + "gif/womanVoice.gif" + ')', 'url(' + "stopGif/womanVoice.jpg" + ')');
+var manSinger = new _Member.ManSinger(manSong, 'url(' + "gif/manVoice.gif" + ')', 'url(' + "stopGif/manVoice.jpg" + ')'); // созданы певцы
 
-var accordeonPlayer = new _Member.Musician(accordeon, 'url(' + "gif/3.gif" + ')', 'url(' + "stopGif/1.jpg" + ')');
-var synthesizerPlayer = new _Member.Musician(synthesizer, 'url(' + "gif/4.gif" + ')', 'url(' + "stopGif/1.jpg" + ')');
-var bassPlayer = new _Member.Musician(bass, 'url(' + "gif/13.gif" + ')', 'url(' + "stopGif/1.jpg" + ')');
-var davulPlayer = new _Member.Musician(davul, 'url(' + "gif/6.gif" + ')', 'url(' + "stopGif/1.jpg" + ')');
-var guitarPlayer = new _Member.Musician(guitar, 'url(' + "gif/7.gif" + ')', 'url(' + "stopGif/1.jpg" + ')');
-var sazPlayer = new _Member.Musician(saz, 'url(' + "gif/8.gif" + ')', 'url(' + "stopGif/1.jpg" + ')');
-var pipePlayer = new _Member.Musician(pipe, 'url(' + "gif/9.gif" + ')', 'url(' + "stopGif/1.jpg" + ')');
-var saxPlayer = new _Member.Musician(sax, 'url(' + "gif/10.gif" + ')', 'url(' + "stopGif/1.jpg" + ')');
-var violinPlayer = new _Member.Musician(violin, 'url(' + "gif/11.gif" + ')', 'url(' + "stopGif/1.jpg" + ')'); // созданы люди играющие на инструментах
+var accordeonPlayer = new _Member.Musician(accordeon, 'url(' + "gif/accordion.gif" + ')', 'url(' + "stopGif/accordion.jpg" + ')');
+var synthesizerPlayer = new _Member.Musician(synthesizer, 'url(' + "gif/synthesizer.gif" + ')', 'url(' + "stopGif/synthesizer.jpg" + ')');
+var bassPlayer = new _Member.Musician(bass, 'url(' + "gif/bass.gif" + ')', 'url(' + "stopGif/bass.jpg" + ')');
+var davulPlayer = new _Member.Musician(davul, 'url(' + "gif/davul.gif" + ')', 'url(' + "stopGif/davul.jpg" + ')');
+var guitarPlayer = new _Member.Musician(guitar, 'url(' + "gif/guitar.gif" + ')', 'url(' + "stopGif/guitar.jpg" + ')');
+var sazPlayer = new _Member.Musician(saz, 'url(' + "gif/saz.gif" + ')', 'url(' + "stopGif/saz.jpg" + ')');
+var pipePlayer = new _Member.Musician(pipe, 'url(' + "gif/pipe.gif" + ')', 'url(' + "stopGif/pipe.jpg" + ')');
+var saxPlayer = new _Member.Musician(sax, 'url(' + "gif/sax.gif" + ')', 'url(' + "stopGif/sax.jpg" + ')');
+var violinPlayer = new _Member.Musician(violin, 'url(' + "gif/violin.gif" + ')', 'url(' + "stopGif/violin.jpg" + ')'); // созданы люди играющие на инструментах
 
 
 function handleDragStart(e) {
@@ -115,6 +115,7 @@ function handleOverDrop2(e) {
     this.appendChild(draggedEl);
     this.className = "";
 
+    //задать размер гифок
     draggedEl.style.width = '450px';
     draggedEl.style.height = '450px';
 
@@ -343,47 +344,3 @@ function getIcon(draggedId) {
         _loop3(index);
     }
 })();
-
-// метод возврщает иконки в исходном размере (дроп вниз), 
-// когда иконки все будут одного размера нужно убрать этот метод
-// function width2(draggedId){
-//     if('box1' == draggedId){
-//         return '300px';
-//     }
-//     if('box2' == draggedId){
-//         return '250px';
-//     }
-//     if('box3' == draggedId){
-//         return '300px';
-//     }
-//     if('box4' == draggedId){
-//         return '213px';
-//     }
-//     if('box5' == draggedId){
-//         return '500px';
-//     }
-//     if('box6' == draggedId){
-//         return '213px';
-//     }
-//     if('box7' == draggedId){
-//         return '350px';
-//     }
-//     if('box8' == draggedId){
-//         return '413px';
-//     }
-//     if('box9' == draggedId){
-//         return '400px';
-//     }
-//     if('box10' == draggedId){
-//         return '400px';
-//     }
-//     if('box11' == draggedId){
-//         return '400px';
-//     }
-//     if('box12' == draggedId){
-//         return '500px';
-//     }
-//     if('box13' == draggedId){
-//         return '400px';
-//     }
-// }
