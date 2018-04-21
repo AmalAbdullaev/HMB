@@ -83,7 +83,7 @@ function handleOverDrop(e) {
 
     //убрать потом  width and height
     draggedEl.style.width = '200px';
-    draggedEl.style.height = '200px';
+    draggedEl.style.height = '270px';
     draggedEl.style.float = 'inherit';
     draggedEl.style.backgroundImage = getIcon(draggedId);
 
@@ -116,8 +116,8 @@ function handleOverDrop2(e) {
     this.className = "";
 
     //задать размер гифок
-    draggedEl.style.width = '450px';
-    draggedEl.style.height = '450px';
+    draggedEl.style.width = '200px';
+    draggedEl.style.height = '273px';
 
     draggedEl.style.backgroundImage = activation(draggedId);
 

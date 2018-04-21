@@ -1,37 +1,55 @@
+body {
+    background-color: rgb(204, 204, 204);
+}
+
+.outer-div
+{
+     padding: 30px;
+}
+.inner-div
+{
+     margin: 0 auto;
+     width: 1600px; 
+}
+
 h2 {
-    color: #a7a3a4;
+    color: black;
     margin-left: 5%;
     margin-right: 5%;
     text-align: center;
 }
 
 [data-drop-target] {
-    height: 50%;
     width: 90%;
-    margin-left: 50px;
-    margin-right: 50px;
-    float:left;
-    border: 4px double black;
-    border-color: rgb(0, 255, 213); 
-    border-width: 0px;
+    height: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-left: 2%;
+    float: left;
+    border-radius: 15px;
 }
 
 [data-drop-target2] {
-    height: 500px;
-    width: 100%;
-    margin-left: 50px;
-    margin-right: 50px;
-    background-color: gainsboro;
+    padding-left: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 420px;
+    width: 90%;
+    background-color: white;
     float:left;
+    border-color: rgb(102, 102, 102);
+    border-radius: 15px;
 }
 
 .window {
     height: 100%;
     width: 100%;
+    margin: 0 auto;
 }
 
 .drag-enter {
     border: 2px dashed #000;
+
 }
 
 .box {
