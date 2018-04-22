@@ -3,6 +3,7 @@ import {Dance} from './Dancing.js';
 import {WindInstrument , StringInstrumet , PercussionInstrument, BowInstrument, KeyboardInstrument } from './Instrument.js';
 import {ManDancer,WomanDancer,ManSinger,WomanSinger,Musician} from './Member.js'; 
 import {Song} from './Song.js';
+import { SSL_OP_LEGACY_SERVER_CONNECT } from "constants";
 
 let manDance = new Dance('url(' + "gif/manDance.gif" + ')','url(' + "stopGif/manDance.jpg" + ')');
 let womanDance = new Dance('url(' + "gif/womanDance.gif" + ')','url(' + "stopGif/womanDance.jpg" + ')');//созданы танцы
@@ -38,94 +39,95 @@ let saxPlayer = new Musician(sax,'url(' + "gif/sax.gif" + ')','url(' + "stopGif/
 let violinPlayer = new Musician(violin,'url(' + "gif/violin.gif" + ')','url(' + "stopGif/violin.jpg" + ')'); // созданы люди играющие на инструментах
 
 let arr = [];
+//класс драгендропа
 class DragAndDrop{
 
-handleDragStart(e) {
-    e.dataTransfer.setData("text", this.id);
-}
+    handleDragStart(e) {
+        e.dataTransfer.setData("text", this.id);
+    }
 
-handleDragEnterLeave(e) {
-    if (e.type == "dragenter") {
-        this.className = "drag-enter";
+    handleDragEnterLeave(e) {
+        if (e.type == "dragenter") {
+            this.className = "drag-enter";
+            let draggedId = e.dataTransfer.getData("text");
+            let draggedEl = document.getElementById(draggedId);
+            draggedEl.style.width = '10px';
+            draggedEl.style.height = '10px';
+            
+        } else {
+            this.className = "";
+        }
+    }
+
+
+    handleOverDrop(e) {
+        e.preventDefault();
+
+        if (e.type != "drop") {
+            return; 
+        }
+
         let draggedId = e.dataTransfer.getData("text");
         let draggedEl = document.getElementById(draggedId);
-        draggedEl.style.width = '10px';
-        draggedEl.style.height = '10px';
+            
+        if (draggedEl.parentNode == this) {
+            this.className = "";
+            return; 
+        }
+
+        draggedEl.parentNode.removeChild(draggedEl);
+        this.appendChild(draggedEl);
+        this.className = "";
         
-    } else {
-        this.className = "";
-    }
-}
+        //убрать потом  width and height
+        draggedEl.style.width = '200px';
+        draggedEl.style.height = '270px';
+        draggedEl.style.float = 'inherit';
+        draggedEl.style.backgroundImage =member_control.getIcon(draggedId);
 
-
-handleOverDrop(e) {
-    e.preventDefault();
-
-    if (e.type != "drop") {
-        return; 
-    }
-
-    let draggedId = e.dataTransfer.getData("text");
-    let draggedEl = document.getElementById(draggedId);
         
-    if (draggedEl.parentNode == this) {
+        closeButtons(draggedId);
+        let del = arr.indexOf(draggedId);
+        arr.splice(del,1);
+    }
+
+    handleOverDrop2(e) {
+        e.preventDefault();
+
+        if(arr.length>5){
+            return;
+        }
+
+        if (e.type != "drop") {
+            return; //Means function will exit if no "drop" event is fired.
+        }
+
+        let draggedId = e.dataTransfer.getData("text");
+        let draggedEl = document.getElementById(draggedId);
+
+        
+        
+        if (draggedEl.parentNode == this) {
+            this.className = "";
+            return; //note: when a return is reached a function exits.
+        }
+
+        draggedEl.parentNode.removeChild(draggedEl);
+        this.appendChild(draggedEl);
         this.className = "";
-        return; 
+        
+        //задать размер гифок
+        draggedEl.style.width = '200px';
+        draggedEl.style.height = '273px'; 
+
+        draggedEl.style.backgroundImage = member_control.activation(draggedId);
+        
+        
+        openButtons(draggedId);
+        
+        arr.push(draggedId);   
+        
     }
-
-    draggedEl.parentNode.removeChild(draggedEl);
-    this.appendChild(draggedEl);
-    this.className = "";
-    
-    //убрать потом  width and height
-    draggedEl.style.width = '200px';
-    draggedEl.style.height = '270px';
-    draggedEl.style.float = 'inherit';
-    draggedEl.style.backgroundImage =member_control.getIcon(draggedId);
-
-    
-    closeButtons(draggedId);
-    let del = arr.indexOf(draggedId);
-    arr.splice(del,1);
-}
-
-handleOverDrop2(e) {
-    e.preventDefault();
-
-    if(arr.length>5){
-        return;
-    }
-
-    if (e.type != "drop") {
-        return; //Means function will exit if no "drop" event is fired.
-    }
-
-    let draggedId = e.dataTransfer.getData("text");
-    let draggedEl = document.getElementById(draggedId);
-
-    
-    
-    if (draggedEl.parentNode == this) {
-        this.className = "";
-        return; //note: when a return is reached a function exits.
-    }
-
-    draggedEl.parentNode.removeChild(draggedEl);
-    this.appendChild(draggedEl);
-    this.className = "";
-    
-    //задать размер гифок
-    draggedEl.style.width = '200px';
-    draggedEl.style.height = '273px'; 
-
-    draggedEl.style.backgroundImage = member_control.activation(draggedId);
-    
-    
-    openButtons(draggedId);
-    
-    arr.push(draggedId);   
-    
-}
 
 }
 let draggable = document.querySelectorAll('[draggable]')
@@ -153,190 +155,208 @@ let drag_n_drop = new DragAndDrop();
     }
 })();
 
-//активации участника
+
 class MemberControl{
+//активации участника
+    activation(draggedId){
+        
+        if('box1' == draggedId){
+            return manDancer.play();
+        }
+        if('box2' == draggedId){
+            return womanDancer.play();
+        }
+        if('box3' == draggedId){
+            return manSinger.play();
+        }
+        if('box4' == draggedId){
+            return womanSinger.play();
+        }
+        if('box5' == draggedId){
+            return accordeonPlayer.play();
+        }
+        if('box6' == draggedId){
+            return bassPlayer.play();
+        }
+        if('box7' == draggedId){
+            return davulPlayer.play();
+        }
+        if('box8' == draggedId){
+            return guitarPlayer.play();
+        }
+        if('box9' == draggedId){
+            return violinPlayer.play();
+        }
+        if('box10' == draggedId){
+            return pipePlayer.play();
+        }
+        if('box11' == draggedId){
+            return saxPlayer.play();
+        }
+        if('box12' == draggedId){
+            return sazPlayer.play();
+        }
+        if('box13' == draggedId){
+            return synthesizerPlayer.play();
+        }
+    }
 
-
-activation(draggedId){
-    
-    if('box1' == draggedId){
-        return manDancer.play();
+    //отключает участника
+    pause(draggedId){
+        if('box1' == draggedId){
+            return manDancer.pause();
+        }
+        if('box2' == draggedId){
+            return womanDancer.pause();
+        }
+        if('box3' == draggedId){
+            return manSinger.pause();
+        }
+        if('box4' == draggedId){
+            return womanSinger.pause();
+        }
+        if('box5' == draggedId){
+            return accordeonPlayer.pause();
+        }
+        if('box6' == draggedId){
+            return bassPlayer.pause();
+        }
+        if('box7' == draggedId){
+            return davulPlayer.pause();
+        }
+        if('box8' == draggedId){
+            return guitarPlayer.pause();
+        }
+        if('box9' == draggedId){
+            return violinPlayer.pause();
+        }
+        if('box10' == draggedId){
+            return pipePlayer.pause();
+        }
+        if('box11' == draggedId){
+            return saxPlayer.pause();
+        }
+        if('box12' == draggedId){
+            return sazPlayer.pause();
+        }
+        if('box13' == draggedId){
+            return synthesizerPlayer.pause();
+        }
     }
-    if('box2' == draggedId){
-        return womanDancer.play();
+    //получить иконку вместо учасника
+    getIcon(draggedId){
+        if('box1' == draggedId){
+            return 'url(' + "icons/icoHalpah.png" + ')';
+        }
+        if('box2' == draggedId){
+            return 'url(' + "icons/icoFes.png" + ')';
+        }
+        if('box3' == draggedId){
+            manSinger.pause();
+            return 'url(' + "icons/icoMicroH.png" + ')';
+        }
+        if('box4' == draggedId){
+            womanSinger.pause();
+            return 'url(' + "icons/icoMicroF.png" + ')';
+        }
+        if('box5' == draggedId){
+            accordeonPlayer.pause();
+            return 'url(' + "icons/icoMusicAccordeon.png" + ')';
+        }
+        if('box6' == draggedId){
+            bassPlayer.pause();
+            return 'url(' + "icons/icoMusicBass.png" + ')';
+        }
+        if('box7' == draggedId){
+            davulPlayer.pause();
+            return 'url(' + "icons/icoMusicDavul.png" + ')';
+        }
+        if('box8' == draggedId){
+            guitarPlayer.pause();
+            return 'url(' + "icons/icoMusicGuitar.png" + ')';
+        }
+        if('box9' == draggedId){
+            violinPlayer.pause();
+            return 'url(' + "icons/icoMusicViolin.png" + ')';
+        }
+        if('box10' == draggedId){
+            pipePlayer.pause();
+            return 'url(' + "icons/icoMusicPipe.png" + ')';
+        }
+        if('box11' == draggedId){
+            saxPlayer.pause();
+            return 'url(' + "icons/icoMusicSax.png" + ')';
+        }
+        if('box12' == draggedId){
+            sazPlayer.pause();
+            return 'url(' + "icons/icoMusicSaz.png" + ')';
+        }
+        if('box13' == draggedId){
+            synthesizerPlayer.pause();
+            return 'url(' + "icons/icoMusicSynthesizer.png" + ')';
+        }
     }
-    if('box3' == draggedId){
-        return manSinger.play();
-    }
-    if('box4' == draggedId){
-        return womanSinger.play();
-    }
-    if('box5' == draggedId){
-        return accordeonPlayer.play();
-    }
-    if('box6' == draggedId){
-        return bassPlayer.play();
-    }
-    if('box7' == draggedId){
-        return davulPlayer.play();
-    }
-    if('box8' == draggedId){
-        return guitarPlayer.play();
-    }
-    if('box9' == draggedId){
-        return violinPlayer.play();
-    }
-    if('box10' == draggedId){
-        return pipePlayer.play();
-    }
-    if('box11' == draggedId){
-        return saxPlayer.play();
-    }
-    if('box12' == draggedId){
-        return sazPlayer.play();
-    }
-    if('box13' == draggedId){
-        return synthesizerPlayer.play();
-    }
-}
-
-//отключает участника
-pause(draggedId){
-    if('box1' == draggedId){
-        return manDancer.pause();
-    }
-    if('box2' == draggedId){
-        return womanDancer.pause();
-    }
-    if('box3' == draggedId){
-        return manSinger.pause();
-    }
-    if('box4' == draggedId){
-        return womanSinger.pause();
-    }
-    if('box5' == draggedId){
-        return accordeonPlayer.pause();
-    }
-    if('box6' == draggedId){
-        return bassPlayer.pause();
-    }
-    if('box7' == draggedId){
-        return davulPlayer.pause();
-    }
-    if('box8' == draggedId){
-        return guitarPlayer.pause();
-    }
-    if('box9' == draggedId){
-        return violinPlayer.pause();
-    }
-    if('box10' == draggedId){
-        return pipePlayer.pause();
-    }
-    if('box11' == draggedId){
-        return saxPlayer.pause();
-    }
-    if('box12' == draggedId){
-        return sazPlayer.pause();
-    }
-    if('box13' == draggedId){
-        return synthesizerPlayer.pause();
-    }
-}
-//получить иконку вместо учасника
-getIcon(draggedId){
-    if('box1' == draggedId){
-        return 'url(' + "icons/icoHalpah.png" + ')';
-    }
-    if('box2' == draggedId){
-        return 'url(' + "icons/icoFes.png" + ')';
-    }
-    if('box3' == draggedId){
-        manSinger.pause();
-        return 'url(' + "icons/icoMicroH.png" + ')';
-    }
-    if('box4' == draggedId){
-        womanSinger.pause();
-        return 'url(' + "icons/icoMicroF.png" + ')';
-    }
-    if('box5' == draggedId){
-        accordeonPlayer.pause();
-        return 'url(' + "icons/icoMusicAccordeon.png" + ')';
-    }
-    if('box6' == draggedId){
-        bassPlayer.pause();
-        return 'url(' + "icons/icoMusicBass.png" + ')';
-    }
-    if('box7' == draggedId){
-        davulPlayer.pause();
-        return 'url(' + "icons/icoMusicDavul.png" + ')';
-    }
-    if('box8' == draggedId){
-        guitarPlayer.pause();
-        return 'url(' + "icons/icoMusicGuitar.png" + ')';
-    }
-    if('box9' == draggedId){
-        violinPlayer.pause();
-        return 'url(' + "icons/icoMusicViolin.png" + ')';
-    }
-    if('box10' == draggedId){
-        pipePlayer.pause();
-        return 'url(' + "icons/icoMusicPipe.png" + ')';
-    }
-    if('box11' == draggedId){
-        saxPlayer.pause();
-        return 'url(' + "icons/icoMusicSax.png" + ')';
-    }
-    if('box12' == draggedId){
-        sazPlayer.pause();
-        return 'url(' + "icons/icoMusicSaz.png" + ')';
-    }
-    if('box13' == draggedId){
-        synthesizerPlayer.pause();
-        return 'url(' + "icons/icoMusicSynthesizer.png" + ')';
-    }
-}
 }
 
 let member_control = new MemberControl();
-//обработчики кнопок solo(on-off) and play(on-off)
 
-(function (){
-    // Вешаем обработчик клика на solo  каждого участника
-    for (let i = 1; i <=13; i++) {
-        document.querySelector('#btnSoloOn'+i).addEventListener('click', function(e){ 
-            let elemIndex = arr.indexOf('box'+i);
-            for (let index = 0; index < arr.length; index++){
-                let elem = document.getElementById(arr[index]);
-                    if(index!=elemIndex){
-                        elem.style.backgroundImage =member_control.pause(arr[index]);
-                    }else{
-                        elem.style.backgroundImage = member_control.activation(arr[index]);
+
+
+
+//обработчики кнопок solo(on-off) and play(on-off)
+class ButtonHandler{
+
+    activateSolo(){
+        // Вешаем обработчик клика на solo  каждого участника
+        for (let i = 1; i <=13; i++) {
+            document.querySelector('#btnSoloOn'+i).addEventListener('click', function(e){ 
+                let elemIndex = arr.indexOf('box'+i);
+                for (let index = 0; index < arr.length; index++){
+                    let elem = document.getElementById(arr[index]);
+                        if(index!=elemIndex){
+                            elem.style.backgroundImage =member_control.pause(arr[index]);
+                        }else{
+                            elem.style.backgroundImage = member_control.activation(arr[index]);
+                        }
                     }
+            });
+        }
+    }
+
+    deactivateSolo(){    
+        for (let i = 1; i <=13; i++) {
+            document.querySelector('#btnSoloOff'+i).addEventListener('click', function(e){ 
+                for (let index = 0; index < arr.length; index++) {
+                    let elem = document.getElementById(arr[index]);
+                    elem.style.backgroundImage = member_control.activation(arr[index]);
                 }
-        });
+            });
+        }
     }
-    
-    for (let i = 1; i <=13; i++) {
-        document.querySelector('#btnSoloOff'+i).addEventListener('click', function(e){ 
-            for (let index = 0; index < arr.length; index++) {
-                let elem = document.getElementById(arr[index]);
-                elem.style.backgroundImage = member_control.activation(arr[index]);
-            }
-        });
+        // Вешаем обработчик клика на play and pause  каждого участника
+    pause(){
+        for (let index = 1; index <=13; index++) {
+            document.querySelector('#btnPause'+index).addEventListener('click', function(e){ 
+                let elemIndex = arr.indexOf('box'+index);
+                let elem = document.getElementById(arr[elemIndex]);
+                elem.style.backgroundImage = member_control.pause(arr[elemIndex]);
+            });
+        }
     }
-    // Вешаем обработчик клика на play and pause  каждого участника
-    for (let index = 1; index <=13; index++) {
-        document.querySelector('#btnPause'+index).addEventListener('click', function(e){ 
-            let elemIndex = arr.indexOf('box'+index);
-            let elem = document.getElementById(arr[elemIndex]);
-            elem.style.backgroundImage = member_control.pause(arr[elemIndex]);
-        });
+
+    play(){
+        for (let index = 1; index <=13; index++) {
+            document.querySelector('#btnPlay'+index).addEventListener('click', function(e){ 
+                let elemIndex = arr.indexOf('box'+index);
+                let elem = document.getElementById(arr[elemIndex]);
+                elem.style.backgroundImage = member_control.activation(arr[elemIndex]);
+            });
+        }
     }
-    for (let index = 1; index <=13; index++) {
-        document.querySelector('#btnPlay'+index).addEventListener('click', function(e){ 
-            let elemIndex = arr.indexOf('box'+index);
-            let elem = document.getElementById(arr[elemIndex]);
-            elem.style.backgroundImage = member_control.activation(arr[elemIndex]);
-        });
-    }
-})();
+}
+
+let button_handler = new ButtonHandler();
+button_handler.activateSolo();
+button_handler.deactivateSolo();
+button_handler.pause();
+button_handler.play();

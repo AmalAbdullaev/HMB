@@ -12,6 +12,8 @@ var _Member = require('./Member.js');
 
 var _Song = require('./Song.js');
 
+var _constants = require('constants');
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var manDance = new _Dancing.Dance('url(' + "gif/manDance.gif" + ')', 'url(' + "stopGif/manDance.jpg" + ')');
@@ -48,6 +50,7 @@ var saxPlayer = new _Member.Musician(sax, 'url(' + "gif/sax.gif" + ')', 'url(' +
 var violinPlayer = new _Member.Musician(violin, 'url(' + "gif/violin.gif" + ')', 'url(' + "stopGif/violin.jpg" + ')'); // созданы люди играющие на инструментах
 
 var arr = [];
+//класс драгендропа
 
 var DragAndDrop = function () {
     function DragAndDrop() {
@@ -168,8 +171,6 @@ var drag_n_drop = new DragAndDrop();
     }
 })();
 
-//активации участника
-
 var MemberControl = function () {
     function MemberControl() {
         _classCallCheck(this, MemberControl);
@@ -177,6 +178,8 @@ var MemberControl = function () {
 
     _createClass(MemberControl, [{
         key: 'activation',
+
+        //активации участника
         value: function activation(draggedId) {
 
             if ('box1' == draggedId) {
@@ -327,59 +330,87 @@ var MemberControl = function () {
 }();
 
 var member_control = new MemberControl();
+
 //обработчики кнопок solo(on-off) and play(on-off)
 
-(function () {
-    var _loop = function _loop(i) {
-        document.querySelector('#btnSoloOn' + i).addEventListener('click', function (e) {
-            var elemIndex = arr.indexOf('box' + i);
-            for (var index = 0; index < arr.length; index++) {
-                var elem = document.getElementById(arr[index]);
-                if (index != elemIndex) {
-                    elem.style.backgroundImage = member_control.pause(arr[index]);
-                } else {
-                    elem.style.backgroundImage = member_control.activation(arr[index]);
-                }
+var ButtonHandler = function () {
+    function ButtonHandler() {
+        _classCallCheck(this, ButtonHandler);
+    }
+
+    _createClass(ButtonHandler, [{
+        key: 'activateSolo',
+        value: function activateSolo() {
+            var _loop = function _loop(i) {
+                document.querySelector('#btnSoloOn' + i).addEventListener('click', function (e) {
+                    var elemIndex = arr.indexOf('box' + i);
+                    for (var index = 0; index < arr.length; index++) {
+                        var elem = document.getElementById(arr[index]);
+                        if (index != elemIndex) {
+                            elem.style.backgroundImage = member_control.pause(arr[index]);
+                        } else {
+                            elem.style.backgroundImage = member_control.activation(arr[index]);
+                        }
+                    }
+                });
+            };
+
+            // Вешаем обработчик клика на solo  каждого участника
+            for (var i = 1; i <= 13; i++) {
+                _loop(i);
             }
-        });
-    };
-
-    // Вешаем обработчик клика на solo  каждого участника
-    for (var i = 1; i <= 13; i++) {
-        _loop(i);
-    }
-
-    for (var i = 1; i <= 13; i++) {
-        document.querySelector('#btnSoloOff' + i).addEventListener('click', function (e) {
-            for (var index = 0; index < arr.length; index++) {
-                var elem = document.getElementById(arr[index]);
-                elem.style.backgroundImage = member_control.activation(arr[index]);
+        }
+    }, {
+        key: 'deactivateSolo',
+        value: function deactivateSolo() {
+            for (var i = 1; i <= 13; i++) {
+                document.querySelector('#btnSoloOff' + i).addEventListener('click', function (e) {
+                    for (var index = 0; index < arr.length; index++) {
+                        var elem = document.getElementById(arr[index]);
+                        elem.style.backgroundImage = member_control.activation(arr[index]);
+                    }
+                });
             }
-        });
-    }
-    // Вешаем обработчик клика на play and pause  каждого участника
+        }
+        // Вешаем обработчик клика на play and pause  каждого участника
 
-    var _loop2 = function _loop2(index) {
-        document.querySelector('#btnPause' + index).addEventListener('click', function (e) {
-            var elemIndex = arr.indexOf('box' + index);
-            var elem = document.getElementById(arr[elemIndex]);
-            elem.style.backgroundImage = member_control.pause(arr[elemIndex]);
-        });
-    };
+    }, {
+        key: 'pause',
+        value: function pause() {
+            var _loop2 = function _loop2(index) {
+                document.querySelector('#btnPause' + index).addEventListener('click', function (e) {
+                    var elemIndex = arr.indexOf('box' + index);
+                    var elem = document.getElementById(arr[elemIndex]);
+                    elem.style.backgroundImage = member_control.pause(arr[elemIndex]);
+                });
+            };
 
-    for (var index = 1; index <= 13; index++) {
-        _loop2(index);
-    }
+            for (var index = 1; index <= 13; index++) {
+                _loop2(index);
+            }
+        }
+    }, {
+        key: 'play',
+        value: function play() {
+            var _loop3 = function _loop3(index) {
+                document.querySelector('#btnPlay' + index).addEventListener('click', function (e) {
+                    var elemIndex = arr.indexOf('box' + index);
+                    var elem = document.getElementById(arr[elemIndex]);
+                    elem.style.backgroundImage = member_control.activation(arr[elemIndex]);
+                });
+            };
 
-    var _loop3 = function _loop3(index) {
-        document.querySelector('#btnPlay' + index).addEventListener('click', function (e) {
-            var elemIndex = arr.indexOf('box' + index);
-            var elem = document.getElementById(arr[elemIndex]);
-            elem.style.backgroundImage = member_control.activation(arr[elemIndex]);
-        });
-    };
+            for (var index = 1; index <= 13; index++) {
+                _loop3(index);
+            }
+        }
+    }]);
 
-    for (var index = 1; index <= 13; index++) {
-        _loop3(index);
-    }
-})();
+    return ButtonHandler;
+}();
+
+var button_handler = new ButtonHandler();
+button_handler.activateSolo();
+button_handler.deactivateSolo();
+button_handler.pause();
+button_handler.play();
