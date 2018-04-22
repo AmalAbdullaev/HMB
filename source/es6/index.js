@@ -37,12 +37,14 @@ let pipePlayer = new Musician(pipe,'url(' + "gif/pipe.gif" + ')','url(' + "stopG
 let saxPlayer = new Musician(sax,'url(' + "gif/sax.gif" + ')','url(' + "stopGif/sax.jpg" + ')');
 let violinPlayer = new Musician(violin,'url(' + "gif/violin.gif" + ')','url(' + "stopGif/violin.jpg" + ')'); // созданы люди играющие на инструментах
 
+let arr = [];
+class DragAndDrop{
 
-function handleDragStart(e) {
+handleDragStart(e) {
     e.dataTransfer.setData("text", this.id);
 }
 
-function handleDragEnterLeave(e) {
+handleDragEnterLeave(e) {
     if (e.type == "dragenter") {
         this.className = "drag-enter";
         let draggedId = e.dataTransfer.getData("text");
@@ -55,10 +57,8 @@ function handleDragEnterLeave(e) {
     }
 }
 
-let arr = [];
-    
-    
-function handleOverDrop(e) {
+
+handleOverDrop(e) {
     e.preventDefault();
 
     if (e.type != "drop") {
@@ -89,7 +89,7 @@ function handleOverDrop(e) {
     arr.splice(del,1);
 }
 
-function handleOverDrop2(e) {
+handleOverDrop2(e) {
     e.preventDefault();
 
     if(arr.length>5){
@@ -126,27 +126,30 @@ function handleOverDrop2(e) {
     arr.push(draggedId);   
     
 }
+
+}
 let draggable = document.querySelectorAll('[draggable]')
 let targets = document.querySelectorAll('[data-drop-target]');
 let targets2 = document.querySelectorAll('[data-drop-target2]');
+let drag_n_drop = new DragAndDrop();
 
 //задаем дропы на элементы
 (function(){
     for (let i = 0; i < draggable.length; i++) {
-        draggable[i].addEventListener("dragstart", handleDragStart);
+        draggable[i].addEventListener("dragstart",drag_n_drop.handleDragStart);
     }
     
     for (let i = 0; i < targets.length; i++) {
-        targets[i].addEventListener("dragover", handleOverDrop);
-        targets[i].addEventListener("drop", handleOverDrop);
-        targets[i].addEventListener("dragenter", handleDragEnterLeave);
-        targets[i].addEventListener("dragleave", handleDragEnterLeave);
+        targets[i].addEventListener("dragover", drag_n_drop.handleOverDrop);
+        targets[i].addEventListener("drop",drag_n_drop.handleOverDrop);
+        targets[i].addEventListener("dragenter",drag_n_drop.handleDragEnterLeave);
+        targets[i].addEventListener("dragleave",drag_n_drop.handleDragEnterLeave);
     }
     for (let i = 0; i < targets.length; i++) {
-        targets2[i].addEventListener("dragover", handleOverDrop2);
-        targets2[i].addEventListener("drop", handleOverDrop2);
-        targets2[i].addEventListener("dragenter", handleDragEnterLeave);
-        targets2[i].addEventListener("dragleave", handleDragEnterLeave);
+        targets2[i].addEventListener("dragover",drag_n_drop.handleOverDrop2);
+        targets2[i].addEventListener("drop", drag_n_drop.handleOverDrop2);
+        targets2[i].addEventListener("dragenter", drag_n_drop.handleDragEnterLeave);
+        targets2[i].addEventListener("dragleave", drag_n_drop.handleDragEnterLeave);
     }
 })();
 

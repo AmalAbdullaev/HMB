@@ -1,5 +1,7 @@
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _buttons = require('./buttons.js');
 
 var _Dancing = require('./Dancing.js');
@@ -9,6 +11,8 @@ var _Instrument = require('./Instrument.js');
 var _Member = require('./Member.js');
 
 var _Song = require('./Song.js');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var manDance = new _Dancing.Dance('url(' + "gif/manDance.gif" + ')', 'url(' + "stopGif/manDance.jpg" + ')');
 var womanDance = new _Dancing.Dance('url(' + "gif/womanDance.gif" + ')', 'url(' + "stopGif/womanDance.jpg" + ')'); //созданы танцы
@@ -43,109 +47,124 @@ var pipePlayer = new _Member.Musician(pipe, 'url(' + "gif/pipe.gif" + ')', 'url(
 var saxPlayer = new _Member.Musician(sax, 'url(' + "gif/sax.gif" + ')', 'url(' + "stopGif/sax.jpg" + ')');
 var violinPlayer = new _Member.Musician(violin, 'url(' + "gif/violin.gif" + ')', 'url(' + "stopGif/violin.jpg" + ')'); // созданы люди играющие на инструментах
 
-
-function handleDragStart(e) {
-    e.dataTransfer.setData("text", this.id);
-}
-
-function handleDragEnterLeave(e) {
-    if (e.type == "dragenter") {
-        this.className = "drag-enter";
-        var draggedId = e.dataTransfer.getData("text");
-        var draggedEl = document.getElementById(draggedId);
-        draggedEl.style.width = '10px';
-        draggedEl.style.height = '10px';
-    } else {
-        this.className = "";
-    }
-}
-
 var arr = [];
 
-function handleOverDrop(e) {
-    e.preventDefault();
-
-    if (e.type != "drop") {
-        return;
+var DragAndDrop = function () {
+    function DragAndDrop() {
+        _classCallCheck(this, DragAndDrop);
     }
 
-    var draggedId = e.dataTransfer.getData("text");
-    var draggedEl = document.getElementById(draggedId);
+    _createClass(DragAndDrop, [{
+        key: 'handleDragStart',
+        value: function handleDragStart(e) {
+            e.dataTransfer.setData("text", this.id);
+        }
+    }, {
+        key: 'handleDragEnterLeave',
+        value: function handleDragEnterLeave(e) {
+            if (e.type == "dragenter") {
+                this.className = "drag-enter";
+                var draggedId = e.dataTransfer.getData("text");
+                var draggedEl = document.getElementById(draggedId);
+                draggedEl.style.width = '10px';
+                draggedEl.style.height = '10px';
+            } else {
+                this.className = "";
+            }
+        }
+    }, {
+        key: 'handleOverDrop',
+        value: function handleOverDrop(e) {
+            e.preventDefault();
 
-    if (draggedEl.parentNode == this) {
-        this.className = "";
-        return;
-    }
+            if (e.type != "drop") {
+                return;
+            }
 
-    draggedEl.parentNode.removeChild(draggedEl);
-    this.appendChild(draggedEl);
-    this.className = "";
+            var draggedId = e.dataTransfer.getData("text");
+            var draggedEl = document.getElementById(draggedId);
 
-    //убрать потом  width and height
-    draggedEl.style.width = '200px';
-    draggedEl.style.height = '270px';
-    draggedEl.style.float = 'inherit';
-    draggedEl.style.backgroundImage = getIcon(draggedId);
+            if (draggedEl.parentNode == this) {
+                this.className = "";
+                return;
+            }
 
-    (0, _buttons.closeButtons)(draggedId);
-    var del = arr.indexOf(draggedId);
-    arr.splice(del, 1);
-}
+            draggedEl.parentNode.removeChild(draggedEl);
+            this.appendChild(draggedEl);
+            this.className = "";
 
-function handleOverDrop2(e) {
-    e.preventDefault();
+            //убрать потом  width and height
+            draggedEl.style.width = '200px';
+            draggedEl.style.height = '270px';
+            draggedEl.style.float = 'inherit';
+            draggedEl.style.backgroundImage = getIcon(draggedId);
 
-    if (arr.length > 5) {
-        return;
-    }
+            (0, _buttons.closeButtons)(draggedId);
+            var del = arr.indexOf(draggedId);
+            arr.splice(del, 1);
+        }
+    }, {
+        key: 'handleOverDrop2',
+        value: function handleOverDrop2(e) {
+            e.preventDefault();
 
-    if (e.type != "drop") {
-        return; //Means function will exit if no "drop" event is fired.
-    }
+            if (arr.length > 5) {
+                return;
+            }
 
-    var draggedId = e.dataTransfer.getData("text");
-    var draggedEl = document.getElementById(draggedId);
+            if (e.type != "drop") {
+                return; //Means function will exit if no "drop" event is fired.
+            }
 
-    if (draggedEl.parentNode == this) {
-        this.className = "";
-        return; //note: when a return is reached a function exits.
-    }
+            var draggedId = e.dataTransfer.getData("text");
+            var draggedEl = document.getElementById(draggedId);
 
-    draggedEl.parentNode.removeChild(draggedEl);
-    this.appendChild(draggedEl);
-    this.className = "";
+            if (draggedEl.parentNode == this) {
+                this.className = "";
+                return; //note: when a return is reached a function exits.
+            }
 
-    //задать размер гифок
-    draggedEl.style.width = '200px';
-    draggedEl.style.height = '273px';
+            draggedEl.parentNode.removeChild(draggedEl);
+            this.appendChild(draggedEl);
+            this.className = "";
 
-    draggedEl.style.backgroundImage = activation(draggedId);
+            //задать размер гифок
+            draggedEl.style.width = '200px';
+            draggedEl.style.height = '273px';
 
-    (0, _buttons.openButtons)(draggedId);
+            draggedEl.style.backgroundImage = activation(draggedId);
 
-    arr.push(draggedId);
-}
+            (0, _buttons.openButtons)(draggedId);
+
+            arr.push(draggedId);
+        }
+    }]);
+
+    return DragAndDrop;
+}();
+
 var draggable = document.querySelectorAll('[draggable]');
 var targets = document.querySelectorAll('[data-drop-target]');
 var targets2 = document.querySelectorAll('[data-drop-target2]');
+var drag_n_drop = new DragAndDrop();
 
 //задаем дропы на элементы
 (function () {
     for (var i = 0; i < draggable.length; i++) {
-        draggable[i].addEventListener("dragstart", handleDragStart);
+        draggable[i].addEventListener("dragstart", drag_n_drop.handleDragStart);
     }
 
     for (var _i = 0; _i < targets.length; _i++) {
-        targets[_i].addEventListener("dragover", handleOverDrop);
-        targets[_i].addEventListener("drop", handleOverDrop);
-        targets[_i].addEventListener("dragenter", handleDragEnterLeave);
-        targets[_i].addEventListener("dragleave", handleDragEnterLeave);
+        targets[_i].addEventListener("dragover", drag_n_drop.handleOverDrop);
+        targets[_i].addEventListener("drop", drag_n_drop.handleOverDrop);
+        targets[_i].addEventListener("dragenter", drag_n_drop.handleDragEnterLeave);
+        targets[_i].addEventListener("dragleave", drag_n_drop.handleDragEnterLeave);
     }
     for (var _i2 = 0; _i2 < targets.length; _i2++) {
-        targets2[_i2].addEventListener("dragover", handleOverDrop2);
-        targets2[_i2].addEventListener("drop", handleOverDrop2);
-        targets2[_i2].addEventListener("dragenter", handleDragEnterLeave);
-        targets2[_i2].addEventListener("dragleave", handleDragEnterLeave);
+        targets2[_i2].addEventListener("dragover", drag_n_drop.handleOverDrop2);
+        targets2[_i2].addEventListener("drop", drag_n_drop.handleOverDrop2);
+        targets2[_i2].addEventListener("dragenter", drag_n_drop.handleDragEnterLeave);
+        targets2[_i2].addEventListener("dragleave", drag_n_drop.handleDragEnterLeave);
     }
 })();
 
