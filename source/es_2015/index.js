@@ -97,7 +97,7 @@ var DragAndDrop = function () {
             draggedEl.style.width = '200px';
             draggedEl.style.height = '270px';
             draggedEl.style.float = 'inherit';
-            draggedEl.style.backgroundImage = getIcon(draggedId);
+            draggedEl.style.backgroundImage = member_control.getIcon(draggedId);
 
             (0, _buttons.closeButtons)(draggedId);
             var del = arr.indexOf(draggedId);
@@ -132,7 +132,7 @@ var DragAndDrop = function () {
             draggedEl.style.width = '200px';
             draggedEl.style.height = '273px';
 
-            draggedEl.style.backgroundImage = activation(draggedId);
+            draggedEl.style.backgroundImage = member_control.activation(draggedId);
 
             (0, _buttons.openButtons)(draggedId);
 
@@ -169,146 +169,166 @@ var drag_n_drop = new DragAndDrop();
 })();
 
 //активации участника
-function activation(draggedId) {
 
-    if ('box1' == draggedId) {
-        return manDancer.play();
+var MemberControl = function () {
+    function MemberControl() {
+        _classCallCheck(this, MemberControl);
     }
-    if ('box2' == draggedId) {
-        return womanDancer.play();
-    }
-    if ('box3' == draggedId) {
-        return manSinger.play();
-    }
-    if ('box4' == draggedId) {
-        return womanSinger.play();
-    }
-    if ('box5' == draggedId) {
-        return accordeonPlayer.play();
-    }
-    if ('box6' == draggedId) {
-        return bassPlayer.play();
-    }
-    if ('box7' == draggedId) {
-        return davulPlayer.play();
-    }
-    if ('box8' == draggedId) {
-        return guitarPlayer.play();
-    }
-    if ('box9' == draggedId) {
-        return violinPlayer.play();
-    }
-    if ('box10' == draggedId) {
-        return pipePlayer.play();
-    }
-    if ('box11' == draggedId) {
-        return saxPlayer.play();
-    }
-    if ('box12' == draggedId) {
-        return sazPlayer.play();
-    }
-    if ('box13' == draggedId) {
-        return synthesizerPlayer.play();
-    }
-}
 
-//отключает участника
-function pause(draggedId) {
-    if ('box1' == draggedId) {
-        return manDancer.pause();
-    }
-    if ('box2' == draggedId) {
-        return womanDancer.pause();
-    }
-    if ('box3' == draggedId) {
-        return manSinger.pause();
-    }
-    if ('box4' == draggedId) {
-        return womanSinger.pause();
-    }
-    if ('box5' == draggedId) {
-        return accordeonPlayer.pause();
-    }
-    if ('box6' == draggedId) {
-        return bassPlayer.pause();
-    }
-    if ('box7' == draggedId) {
-        return davulPlayer.pause();
-    }
-    if ('box8' == draggedId) {
-        return guitarPlayer.pause();
-    }
-    if ('box9' == draggedId) {
-        return violinPlayer.pause();
-    }
-    if ('box10' == draggedId) {
-        return pipePlayer.pause();
-    }
-    if ('box11' == draggedId) {
-        return saxPlayer.pause();
-    }
-    if ('box12' == draggedId) {
-        return sazPlayer.pause();
-    }
-    if ('box13' == draggedId) {
-        return synthesizerPlayer.pause();
-    }
-}
+    _createClass(MemberControl, [{
+        key: 'activation',
+        value: function activation(draggedId) {
 
-function getIcon(draggedId) {
-    if ('box1' == draggedId) {
-        return 'url(' + "icons/icoHalpah.png" + ')';
-    }
-    if ('box2' == draggedId) {
-        return 'url(' + "icons/icoFes.png" + ')';
-    }
-    if ('box3' == draggedId) {
-        manSinger.pause();
-        return 'url(' + "icons/icoMicroH.png" + ')';
-    }
-    if ('box4' == draggedId) {
-        womanSinger.pause();
-        return 'url(' + "icons/icoMicroF.png" + ')';
-    }
-    if ('box5' == draggedId) {
-        accordeonPlayer.pause();
-        return 'url(' + "icons/icoMusicAccordeon.png" + ')';
-    }
-    if ('box6' == draggedId) {
-        bassPlayer.pause();
-        return 'url(' + "icons/icoMusicBass.png" + ')';
-    }
-    if ('box7' == draggedId) {
-        davulPlayer.pause();
-        return 'url(' + "icons/icoMusicDavul.png" + ')';
-    }
-    if ('box8' == draggedId) {
-        guitarPlayer.pause();
-        return 'url(' + "icons/icoMusicGuitar.png" + ')';
-    }
-    if ('box9' == draggedId) {
-        violinPlayer.pause();
-        return 'url(' + "icons/icoMusicViolin.png" + ')';
-    }
-    if ('box10' == draggedId) {
-        pipePlayer.pause();
-        return 'url(' + "icons/icoMusicPipe.png" + ')';
-    }
-    if ('box11' == draggedId) {
-        saxPlayer.pause();
-        return 'url(' + "icons/icoMusicSax.png" + ')';
-    }
-    if ('box12' == draggedId) {
-        sazPlayer.pause();
-        return 'url(' + "icons/icoMusicSaz.png" + ')';
-    }
-    if ('box13' == draggedId) {
-        synthesizerPlayer.pause();
-        return 'url(' + "icons/icoMusicSynthesizer.png" + ')';
-    }
-}
+            if ('box1' == draggedId) {
+                return manDancer.play();
+            }
+            if ('box2' == draggedId) {
+                return womanDancer.play();
+            }
+            if ('box3' == draggedId) {
+                return manSinger.play();
+            }
+            if ('box4' == draggedId) {
+                return womanSinger.play();
+            }
+            if ('box5' == draggedId) {
+                return accordeonPlayer.play();
+            }
+            if ('box6' == draggedId) {
+                return bassPlayer.play();
+            }
+            if ('box7' == draggedId) {
+                return davulPlayer.play();
+            }
+            if ('box8' == draggedId) {
+                return guitarPlayer.play();
+            }
+            if ('box9' == draggedId) {
+                return violinPlayer.play();
+            }
+            if ('box10' == draggedId) {
+                return pipePlayer.play();
+            }
+            if ('box11' == draggedId) {
+                return saxPlayer.play();
+            }
+            if ('box12' == draggedId) {
+                return sazPlayer.play();
+            }
+            if ('box13' == draggedId) {
+                return synthesizerPlayer.play();
+            }
+        }
 
+        //отключает участника
+
+    }, {
+        key: 'pause',
+        value: function pause(draggedId) {
+            if ('box1' == draggedId) {
+                return manDancer.pause();
+            }
+            if ('box2' == draggedId) {
+                return womanDancer.pause();
+            }
+            if ('box3' == draggedId) {
+                return manSinger.pause();
+            }
+            if ('box4' == draggedId) {
+                return womanSinger.pause();
+            }
+            if ('box5' == draggedId) {
+                return accordeonPlayer.pause();
+            }
+            if ('box6' == draggedId) {
+                return bassPlayer.pause();
+            }
+            if ('box7' == draggedId) {
+                return davulPlayer.pause();
+            }
+            if ('box8' == draggedId) {
+                return guitarPlayer.pause();
+            }
+            if ('box9' == draggedId) {
+                return violinPlayer.pause();
+            }
+            if ('box10' == draggedId) {
+                return pipePlayer.pause();
+            }
+            if ('box11' == draggedId) {
+                return saxPlayer.pause();
+            }
+            if ('box12' == draggedId) {
+                return sazPlayer.pause();
+            }
+            if ('box13' == draggedId) {
+                return synthesizerPlayer.pause();
+            }
+        }
+        //получить иконку вместо учасника
+
+    }, {
+        key: 'getIcon',
+        value: function getIcon(draggedId) {
+            if ('box1' == draggedId) {
+                return 'url(' + "icons/icoHalpah.png" + ')';
+            }
+            if ('box2' == draggedId) {
+                return 'url(' + "icons/icoFes.png" + ')';
+            }
+            if ('box3' == draggedId) {
+                manSinger.pause();
+                return 'url(' + "icons/icoMicroH.png" + ')';
+            }
+            if ('box4' == draggedId) {
+                womanSinger.pause();
+                return 'url(' + "icons/icoMicroF.png" + ')';
+            }
+            if ('box5' == draggedId) {
+                accordeonPlayer.pause();
+                return 'url(' + "icons/icoMusicAccordeon.png" + ')';
+            }
+            if ('box6' == draggedId) {
+                bassPlayer.pause();
+                return 'url(' + "icons/icoMusicBass.png" + ')';
+            }
+            if ('box7' == draggedId) {
+                davulPlayer.pause();
+                return 'url(' + "icons/icoMusicDavul.png" + ')';
+            }
+            if ('box8' == draggedId) {
+                guitarPlayer.pause();
+                return 'url(' + "icons/icoMusicGuitar.png" + ')';
+            }
+            if ('box9' == draggedId) {
+                violinPlayer.pause();
+                return 'url(' + "icons/icoMusicViolin.png" + ')';
+            }
+            if ('box10' == draggedId) {
+                pipePlayer.pause();
+                return 'url(' + "icons/icoMusicPipe.png" + ')';
+            }
+            if ('box11' == draggedId) {
+                saxPlayer.pause();
+                return 'url(' + "icons/icoMusicSax.png" + ')';
+            }
+            if ('box12' == draggedId) {
+                sazPlayer.pause();
+                return 'url(' + "icons/icoMusicSaz.png" + ')';
+            }
+            if ('box13' == draggedId) {
+                synthesizerPlayer.pause();
+                return 'url(' + "icons/icoMusicSynthesizer.png" + ')';
+            }
+        }
+    }]);
+
+    return MemberControl;
+}();
+
+var member_control = new MemberControl();
 //обработчики кнопок solo(on-off) and play(on-off)
+
 (function () {
     var _loop = function _loop(i) {
         document.querySelector('#btnSoloOn' + i).addEventListener('click', function (e) {
@@ -316,9 +336,9 @@ function getIcon(draggedId) {
             for (var index = 0; index < arr.length; index++) {
                 var elem = document.getElementById(arr[index]);
                 if (index != elemIndex) {
-                    elem.style.backgroundImage = pause(arr[index]);
+                    elem.style.backgroundImage = member_control.pause(arr[index]);
                 } else {
-                    elem.style.backgroundImage = activation(arr[index]);
+                    elem.style.backgroundImage = member_control.activation(arr[index]);
                 }
             }
         });
@@ -333,7 +353,7 @@ function getIcon(draggedId) {
         document.querySelector('#btnSoloOff' + i).addEventListener('click', function (e) {
             for (var index = 0; index < arr.length; index++) {
                 var elem = document.getElementById(arr[index]);
-                elem.style.backgroundImage = activation(arr[index]);
+                elem.style.backgroundImage = member_control.activation(arr[index]);
             }
         });
     }
@@ -343,7 +363,7 @@ function getIcon(draggedId) {
         document.querySelector('#btnPause' + index).addEventListener('click', function (e) {
             var elemIndex = arr.indexOf('box' + index);
             var elem = document.getElementById(arr[elemIndex]);
-            elem.style.backgroundImage = pause(arr[elemIndex]);
+            elem.style.backgroundImage = member_control.pause(arr[elemIndex]);
         });
     };
 
@@ -355,7 +375,7 @@ function getIcon(draggedId) {
         document.querySelector('#btnPlay' + index).addEventListener('click', function (e) {
             var elemIndex = arr.indexOf('box' + index);
             var elem = document.getElementById(arr[elemIndex]);
-            elem.style.backgroundImage = activation(arr[elemIndex]);
+            elem.style.backgroundImage = member_control.activation(arr[elemIndex]);
         });
     };
 

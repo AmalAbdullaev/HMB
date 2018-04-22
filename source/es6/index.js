@@ -81,7 +81,7 @@ handleOverDrop(e) {
     draggedEl.style.width = '200px';
     draggedEl.style.height = '270px';
     draggedEl.style.float = 'inherit';
-    draggedEl.style.backgroundImage = getIcon(draggedId);
+    draggedEl.style.backgroundImage =member_control.getIcon(draggedId);
 
     
     closeButtons(draggedId);
@@ -118,7 +118,7 @@ handleOverDrop2(e) {
     draggedEl.style.width = '200px';
     draggedEl.style.height = '273px'; 
 
-    draggedEl.style.backgroundImage = activation(draggedId);
+    draggedEl.style.backgroundImage = member_control.activation(draggedId);
     
     
     openButtons(draggedId);
@@ -154,7 +154,10 @@ let drag_n_drop = new DragAndDrop();
 })();
 
 //активации участника
-function activation(draggedId){
+class MemberControl{
+
+
+activation(draggedId){
     
     if('box1' == draggedId){
         return manDancer.play();
@@ -198,7 +201,7 @@ function activation(draggedId){
 }
 
 //отключает участника
-function pause(draggedId){
+pause(draggedId){
     if('box1' == draggedId){
         return manDancer.pause();
     }
@@ -239,8 +242,8 @@ function pause(draggedId){
         return synthesizerPlayer.pause();
     }
 }
-
-function getIcon(draggedId){
+//получить иконку вместо учасника
+getIcon(draggedId){
     if('box1' == draggedId){
         return 'url(' + "icons/icoHalpah.png" + ')';
     }
@@ -292,8 +295,11 @@ function getIcon(draggedId){
         return 'url(' + "icons/icoMusicSynthesizer.png" + ')';
     }
 }
+}
 
+let member_control = new MemberControl();
 //обработчики кнопок solo(on-off) and play(on-off)
+
 (function (){
     // Вешаем обработчик клика на solo  каждого участника
     for (let i = 1; i <=13; i++) {
@@ -302,9 +308,9 @@ function getIcon(draggedId){
             for (let index = 0; index < arr.length; index++){
                 let elem = document.getElementById(arr[index]);
                     if(index!=elemIndex){
-                        elem.style.backgroundImage = pause(arr[index]);
+                        elem.style.backgroundImage =member_control.pause(arr[index]);
                     }else{
-                        elem.style.backgroundImage = activation(arr[index]);
+                        elem.style.backgroundImage = member_control.activation(arr[index]);
                     }
                 }
         });
@@ -314,7 +320,7 @@ function getIcon(draggedId){
         document.querySelector('#btnSoloOff'+i).addEventListener('click', function(e){ 
             for (let index = 0; index < arr.length; index++) {
                 let elem = document.getElementById(arr[index]);
-                elem.style.backgroundImage = activation(arr[index]);
+                elem.style.backgroundImage = member_control.activation(arr[index]);
             }
         });
     }
@@ -323,14 +329,14 @@ function getIcon(draggedId){
         document.querySelector('#btnPause'+index).addEventListener('click', function(e){ 
             let elemIndex = arr.indexOf('box'+index);
             let elem = document.getElementById(arr[elemIndex]);
-            elem.style.backgroundImage = pause(arr[elemIndex]);
+            elem.style.backgroundImage = member_control.pause(arr[elemIndex]);
         });
     }
     for (let index = 1; index <=13; index++) {
         document.querySelector('#btnPlay'+index).addEventListener('click', function(e){ 
             let elemIndex = arr.indexOf('box'+index);
             let elem = document.getElementById(arr[elemIndex]);
-            elem.style.backgroundImage = activation(arr[elemIndex]);
+            elem.style.backgroundImage = member_control.activation(arr[elemIndex]);
         });
     }
 })();
