@@ -171,6 +171,8 @@ var drag_n_drop = new DragAndDrop();
     }
 })();
 
+//класс контроля участника
+
 var MemberControl = function () {
     function MemberControl() {
         _classCallCheck(this, MemberControl);
@@ -340,6 +342,9 @@ var ButtonHandler = function () {
 
     _createClass(ButtonHandler, [{
         key: 'activateSolo',
+
+
+        // Вешаем обработчик клика на solo  каждого участника
         value: function activateSolo() {
             var _loop = function _loop(i) {
                 document.querySelector('#btnSoloOn' + i).addEventListener('click', function (e) {
@@ -355,7 +360,6 @@ var ButtonHandler = function () {
                 });
             };
 
-            // Вешаем обработчик клика на solo  каждого участника
             for (var i = 1; i <= 13; i++) {
                 _loop(i);
             }
@@ -372,6 +376,7 @@ var ButtonHandler = function () {
                 });
             }
         }
+
         // Вешаем обработчик клика на play and pause  каждого участника
 
     }, {

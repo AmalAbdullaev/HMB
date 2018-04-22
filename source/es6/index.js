@@ -155,9 +155,9 @@ let drag_n_drop = new DragAndDrop();
     }
 })();
 
-
+//класс контроля участника
 class MemberControl{
-//активации участника
+    //активации участника
     activation(draggedId){
         
         if('box1' == draggedId){
@@ -306,8 +306,9 @@ let member_control = new MemberControl();
 //обработчики кнопок solo(on-off) and play(on-off)
 class ButtonHandler{
 
+    // Вешаем обработчик клика на solo  каждого участника
     activateSolo(){
-        // Вешаем обработчик клика на solo  каждого участника
+        
         for (let i = 1; i <=13; i++) {
             document.querySelector('#btnSoloOn'+i).addEventListener('click', function(e){ 
                 let elemIndex = arr.indexOf('box'+i);
@@ -333,7 +334,8 @@ class ButtonHandler{
             });
         }
     }
-        // Вешаем обработчик клика на play and pause  каждого участника
+    
+    // Вешаем обработчик клика на play and pause  каждого участника
     pause(){
         for (let index = 1; index <=13; index++) {
             document.querySelector('#btnPause'+index).addEventListener('click', function(e){ 
