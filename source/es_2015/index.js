@@ -98,7 +98,7 @@ var DragAndDrop = function () {
 
             //убрать потом  width and height
             draggedEl.style.width = '200px';
-            draggedEl.style.height = '270px';
+            draggedEl.style.height = '200px';
             draggedEl.style.float = 'inherit';
             draggedEl.style.backgroundImage = member_control.getIcon(draggedId);
 
@@ -111,7 +111,7 @@ var DragAndDrop = function () {
         value: function handleOverDrop2(e) {
             e.preventDefault();
 
-            if (arr.length > 5) {
+            if (arr.length > 6) {
                 return;
             }
 

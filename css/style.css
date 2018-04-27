@@ -1,67 +1,44 @@
-body {
-    background-color: rgb(204, 204, 204);
-}
-
-.outer-div
+body
 {
-     padding: 30px;
+    background-image: url("../img/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-.inner-div
-{
-     margin: 0 auto;
-     width: 1600px; 
-}
-
 h2 {
     color: black;
-    margin-left: 5%;
-    margin-right: 5%;
     text-align: center;
+    font-size: 40px; 
 }
-
 [data-drop-target] {
-    width: 90%;
-    height: 100%;
-    margin-left: 5%;
-    margin-right: 5%;
-    padding-left: 2%;
     float: left;
     border-radius: 15px;
+    width: 100%;
+    height: 100%;
 }
-
 [data-drop-target2] {
-    padding-left: 2%;
-    margin-left: 5%;
-    margin-right: 5%;
     height: 420px;
-    width: 90%;
-    background-color: white;
+    width: 100%;
+    padding-left: 20px;
+    background-color: rgb(255, 255, 255);
     float:left;
     border-color: rgb(102, 102, 102);
     border-radius: 15px;
 }
-
-.window {
-    height: 100%;
-    width: 100%;
-    margin: 0 auto;
+.container {
+    width: 80%;
+    margin: auto;
 }
-
 .drag-enter {
     border: 2px dashed #000;
-
 }
-
 .box {
     width: 50px;
     height: 50px;
     float: inherit;
 }
-
 .box:nth-child(1) {
     clear: both;
 }
-
 .danceMan {
     background-image: url("../icons/icoHalpah.png");
     height: 200px;
@@ -69,7 +46,6 @@ h2 {
     background-repeat: no-repeat;
     background-position: center; 
 }
-
 .danceGirl {
     background-image: url("../icons/icoFes.png");
     height: 200px;
@@ -77,7 +53,6 @@ h2 {
     background-repeat: no-repeat;
     background-position: center; 
 }
-
 .singerMan {
     background-image: url("../icons/icoMicroH.png");
     height: 200px;
@@ -92,7 +67,6 @@ h2 {
     background-repeat: no-repeat;
     background-position: center; 
 }
-
 .accordeon {
     background-image: url("../icons/icoMusicAccordeon.png");
     height: 200px;
@@ -158,7 +132,6 @@ h2 {
     background-position: center; 
     background-repeat: no-repeat;
 }
-
 #some_el {
     width: 100px;
     height: 100px;
