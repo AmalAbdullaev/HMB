@@ -16,8 +16,8 @@ var _constants = require('constants');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var manDance = new _Dancing.Dance('url(' + "gif/manDance.gif" + ')', 'url(' + "stopGif/manDance.jpg" + ')');
-var womanDance = new _Dancing.Dance('url(' + "gif/womanDance.gif" + ')', 'url(' + "stopGif/womanDance.jpg" + ')'); //созданы танцы
+var manDance = new _Dancing.Dance('url(' + "img/gif/manDance.gif" + ')', 'url(' + "img/stopGif/manDance.jpg" + ')');
+var womanDance = new _Dancing.Dance('url(' + "img/gif/womanDance.gif" + ')', 'url(' + "img/stopGif/womanDance.jpg" + ')'); //созданы танцы
 
 var manSong = new _Song.Song('music/mansong.mp3');
 var womanSong = new _Song.Song('music/womsong.wav'); // созданы песни
@@ -36,18 +36,18 @@ var violin = new _Instrument.BowInstrument('music/violin.mp3'); // создан�
 var womanDancer = new _Member.WomanDancer(womanDance);
 var manDancer = new _Member.ManDancer(manDance); //созданые танцоры
 
-var womanSinger = new _Member.WomanSinger(womanSong, 'url(' + "gif/womanVoice.gif" + ')', 'url(' + "stopGif/womanVoice.jpg" + ')');
-var manSinger = new _Member.ManSinger(manSong, 'url(' + "gif/manVoice.gif" + ')', 'url(' + "stopGif/manVoice.jpg" + ')'); // созданы певцы
+var womanSinger = new _Member.WomanSinger(womanSong, 'url(' + "img/gif/womanVoice.gif" + ')', 'url(' + "img/stopGif/womanVoice.jpg" + ')');
+var manSinger = new _Member.ManSinger(manSong, 'url(' + "img/gif/manVoice.gif" + ')', 'url(' + "img/stopGif/manVoice.jpg" + ')'); // созданы певцы
 
-var accordeonPlayer = new _Member.Musician(accordeon, 'url(' + "gif/accordion.gif" + ')', 'url(' + "stopGif/accordion.jpg" + ')');
-var synthesizerPlayer = new _Member.Musician(synthesizer, 'url(' + "gif/synthesizer.gif" + ')', 'url(' + "stopGif/synthesizer.jpg" + ')');
-var bassPlayer = new _Member.Musician(bass, 'url(' + "gif/bass.gif" + ')', 'url(' + "stopGif/bass.jpg" + ')');
-var davulPlayer = new _Member.Musician(davul, 'url(' + "gif/davul.gif" + ')', 'url(' + "stopGif/davul.jpg" + ')');
-var guitarPlayer = new _Member.Musician(guitar, 'url(' + "gif/guitar.gif" + ')', 'url(' + "stopGif/guitar.jpg" + ')');
-var sazPlayer = new _Member.Musician(saz, 'url(' + "gif/saz.gif" + ')', 'url(' + "stopGif/saz.jpg" + ')');
-var pipePlayer = new _Member.Musician(pipe, 'url(' + "gif/pipe.gif" + ')', 'url(' + "stopGif/pipe.jpg" + ')');
-var saxPlayer = new _Member.Musician(sax, 'url(' + "gif/sax.gif" + ')', 'url(' + "stopGif/sax.jpg" + ')');
-var violinPlayer = new _Member.Musician(violin, 'url(' + "gif/violin.gif" + ')', 'url(' + "stopGif/violin.jpg" + ')'); // созданы люди играющие на инструментах
+var accordeonPlayer = new _Member.Musician(accordeon, 'url(' + "img/gif/accordion.gif" + ')', 'url(' + "img/stopGif/accordion.jpg" + ')');
+var synthesizerPlayer = new _Member.Musician(synthesizer, 'url(' + "img/gif/synthesizer.gif" + ')', 'url(' + "img/stopGif/synthesizer.jpg" + ')');
+var bassPlayer = new _Member.Musician(bass, 'url(' + "img/gif/bass.gif" + ')', 'url(' + "img/stopGif/bass.jpg" + ')');
+var davulPlayer = new _Member.Musician(davul, 'url(' + "img/gif/davul.gif" + ')', 'url(' + "img/stopGif/davul.jpg" + ')');
+var guitarPlayer = new _Member.Musician(guitar, 'url(' + "img/gif/guitar.gif" + ')', 'url(' + "img/stopGif/guitar.jpg" + ')');
+var sazPlayer = new _Member.Musician(saz, 'url(' + "img/gif/saz.gif" + ')', 'url(' + "img/stopGif/saz.jpg" + ')');
+var pipePlayer = new _Member.Musician(pipe, 'url(' + "img/gif/pipe.gif" + ')', 'url(' + "img/stopGif/pipe.jpg" + ')');
+var saxPlayer = new _Member.Musician(sax, 'url(' + "img/gif/sax.gif" + ')', 'url(' + "img/stopGif/sax.jpg" + ')');
+var violinPlayer = new _Member.Musician(violin, 'url(' + "img/gif/violin.gif" + ')', 'url(' + "img/stopGif/violin.jpg" + ')'); // созданы люди играющие на инструментах
 
 var arr = [];
 //класс драгендропа

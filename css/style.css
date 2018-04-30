@@ -16,9 +16,8 @@ h2 {
     height: 100%;
 }
 [data-drop-target2] {
-    height: 420px;
+    min-height: 380px;
     width: 100%;
-    padding-left: 20px;
     background-color: rgb(255, 255, 255);
     float:left;
     border-color: rgb(102, 102, 102);
@@ -32,9 +31,8 @@ h2 {
     border: 2px dashed #000;
 }
 .box {
-    width: 50px;
-    height: 50px;
     float: inherit;
+    padding-left: 15px;
 }
 .box:nth-child(1) {
     clear: both;

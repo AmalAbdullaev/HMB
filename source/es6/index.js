@@ -5,8 +5,8 @@ import {ManDancer,WomanDancer,ManSinger,WomanSinger,Musician} from './Member.js'
 import {Song} from './Song.js';
 import { SSL_OP_LEGACY_SERVER_CONNECT } from "constants";
 
-let manDance = new Dance('url(' + "gif/manDance.gif" + ')','url(' + "stopGif/manDance.jpg" + ')');
-let womanDance = new Dance('url(' + "gif/womanDance.gif" + ')','url(' + "stopGif/womanDance.jpg" + ')');//созданы танцы
+let manDance = new Dance('url(' + "img/gif/manDance.gif" + ')','url(' + "img/stopGif/manDance.jpg" + ')');
+let womanDance = new Dance('url(' + "img/gif/womanDance.gif" + ')','url(' + "img/stopGif/womanDance.jpg" + ')');//созданы танцы
 
 let manSong = new Song('music/mansong.mp3');
 let womanSong = new Song('music/womsong.wav'); // созданы песни
@@ -25,18 +25,18 @@ let violin = new BowInstrument('music/violin.mp3'); // созданы инстр
 let womanDancer = new WomanDancer(womanDance);
 let manDancer = new ManDancer(manDance); //созданые танцоры
 
-let womanSinger = new WomanSinger(womanSong,'url(' + "gif/womanVoice.gif" + ')','url(' + "stopGif/womanVoice.jpg" + ')');
-let manSinger = new ManSinger(manSong,'url(' + "gif/manVoice.gif" + ')','url(' + "stopGif/manVoice.jpg" + ')');// созданы певцы
+let womanSinger = new WomanSinger(womanSong,'url(' + "img/gif/womanVoice.gif" + ')','url(' + "img/stopGif/womanVoice.jpg" + ')');
+let manSinger = new ManSinger(manSong,'url(' + "img/gif/manVoice.gif" + ')','url(' + "img/stopGif/manVoice.jpg" + ')');// созданы певцы
 
-let accordeonPlayer = new Musician(accordeon,'url(' + "gif/accordion.gif" + ')','url(' + "stopGif/accordion.jpg" + ')');
-let synthesizerPlayer = new Musician(synthesizer,'url(' + "gif/synthesizer.gif" + ')','url(' + "stopGif/synthesizer.jpg" + ')');
-let bassPlayer = new Musician(bass,'url(' + "gif/bass.gif" + ')','url(' + "stopGif/bass.jpg" + ')');
-let davulPlayer = new Musician(davul,'url(' + "gif/davul.gif" + ')','url(' + "stopGif/davul.jpg" + ')');
-let guitarPlayer = new Musician(guitar,'url(' + "gif/guitar.gif" + ')','url(' + "stopGif/guitar.jpg" + ')');
-let sazPlayer = new Musician(saz,'url(' + "gif/saz.gif" + ')','url(' + "stopGif/saz.jpg" + ')');
-let pipePlayer = new Musician(pipe,'url(' + "gif/pipe.gif" + ')','url(' + "stopGif/pipe.jpg" + ')');
-let saxPlayer = new Musician(sax,'url(' + "gif/sax.gif" + ')','url(' + "stopGif/sax.jpg" + ')');
-let violinPlayer = new Musician(violin,'url(' + "gif/violin.gif" + ')','url(' + "stopGif/violin.jpg" + ')'); // созданы люди играющие на инструментах
+let accordeonPlayer = new Musician(accordeon,'url(' + "img/gif/accordion.gif" + ')','url(' + "img/stopGif/accordion.jpg" + ')');
+let synthesizerPlayer = new Musician(synthesizer,'url(' + "img/gif/synthesizer.gif" + ')','url(' + "img/stopGif/synthesizer.jpg" + ')');
+let bassPlayer = new Musician(bass,'url(' + "img/gif/bass.gif" + ')','url(' + "img/stopGif/bass.jpg" + ')');
+let davulPlayer = new Musician(davul,'url(' + "img/gif/davul.gif" + ')','url(' + "img/stopGif/davul.jpg" + ')');
+let guitarPlayer = new Musician(guitar,'url(' + "img/gif/guitar.gif" + ')','url(' + "img/stopGif/guitar.jpg" + ')');
+let sazPlayer = new Musician(saz,'url(' + "img/gif/saz.gif" + ')','url(' + "img/stopGif/saz.jpg" + ')');
+let pipePlayer = new Musician(pipe,'url(' + "img/gif/pipe.gif" + ')','url(' + "img/stopGif/pipe.jpg" + ')');
+let saxPlayer = new Musician(sax,'url(' + "img/gif/sax.gif" + ')','url(' + "img/stopGif/sax.jpg" + ')');
+let violinPlayer = new Musician(violin,'url(' + "img/gif/violin.gif" + ')','url(' + "img/stopGif/violin.jpg" + ')'); // созданы люди играющие на инструментах
 
 let arr = [];
 //класс драгендропа
