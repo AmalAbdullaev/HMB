@@ -20,7 +20,7 @@ var manDance = new _Dancing.Dance('url(' + "img/gif/manDance.gif" + ')', 'url(' 
 var womanDance = new _Dancing.Dance('url(' + "img/gif/womanDance.gif" + ')', 'url(' + "img/stopGif/womanDance.jpg" + ')'); //созданы танцы
 
 var manSong = new _Song.Song('music/mansong.mp3');
-var womanSong = new _Song.Song('music/womsong.wav'); // созданы песни
+var womanSong = new _Song.Song('music/womsong.mp3'); // созданы песни
 
 //сменить музыку 
 var accordeon = new _Instrument.KeyboardInstrument('music/accordeon.mp3');

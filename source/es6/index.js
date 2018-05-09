@@ -9,7 +9,7 @@ let manDance = new Dance('url(' + "img/gif/manDance.gif" + ')','url(' + "img/sto
 let womanDance = new Dance('url(' + "img/gif/womanDance.gif" + ')','url(' + "img/stopGif/womanDance.jpg" + ')');//созданы танцы
 
 let manSong = new Song('music/mansong.mp3');
-let womanSong = new Song('music/womsong.wav'); // созданы песни
+let womanSong = new Song('music/womsong.mp3'); // созданы песни
 
 //сменить музыку 
 let accordeon = new KeyboardInstrument('music/accordeon.mp3');
