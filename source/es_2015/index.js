@@ -2,7 +2,7 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _buttons = require('./buttons.js');
+var _Buttons = require('./Buttons.js');
 
 var _Dancing = require('./Dancing.js');
 
@@ -50,6 +50,7 @@ var saxPlayer = new _Member.Musician(sax, 'url(' + "img/gif/sax.gif" + ')', 'url
 var violinPlayer = new _Member.Musician(violin, 'url(' + "img/gif/violin.gif" + ')', 'url(' + "img/stopGif/violin.jpg" + ')'); // созданы люди играющие на инструментах
 
 var arr = [];
+var buttons = new _Buttons.Buttons();
 //класс драгендропа
 
 var DragAndDrop = function () {
@@ -102,7 +103,7 @@ var DragAndDrop = function () {
             draggedEl.style.float = 'inherit';
             draggedEl.style.backgroundImage = member_control.getIcon(draggedId);
 
-            (0, _buttons.closeButtons)(draggedId);
+            buttons.closeButtons(draggedId);
             var del = arr.indexOf(draggedId);
             arr.splice(del, 1);
         }
@@ -137,7 +138,7 @@ var DragAndDrop = function () {
 
             draggedEl.style.backgroundImage = member_control.activation(draggedId);
 
-            (0, _buttons.openButtons)(draggedId);
+            buttons.openButtons(draggedId);
 
             arr.push(draggedId);
         }
