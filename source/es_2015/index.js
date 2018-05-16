@@ -2,7 +2,7 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Buttons = require('./Buttons.js');
+var _ButtonsState = require('./ButtonsState.js');
 
 var _Dancing = require('./Dancing.js');
 
@@ -50,7 +50,8 @@ var saxPlayer = new _Member.Musician(sax, 'url(' + "img/gif/sax.gif" + ')', 'url
 var violinPlayer = new _Member.Musician(violin, 'url(' + "img/gif/violin.gif" + ')', 'url(' + "img/stopGif/violin.jpg" + ')'); // созданы люди играющие на инструментах
 
 var arr = [];
-var buttons = new _Buttons.Buttons();
+//solo and play кнопки чтоб появлялись и исчезали при дропахмод
+var buttonsState = new _ButtonsState.ButtonsState();
 //класс драгендропа
 
 var DragAndDrop = function () {
@@ -77,8 +78,8 @@ var DragAndDrop = function () {
             }
         }
     }, {
-        key: 'handleOverDrop',
-        value: function handleOverDrop(e) {
+        key: 'handleOverDropIconPanel',
+        value: function handleOverDropIconPanel(e) {
             e.preventDefault();
 
             if (e.type != "drop") {
@@ -101,15 +102,15 @@ var DragAndDrop = function () {
             draggedEl.style.width = '200px';
             draggedEl.style.height = '200px';
             draggedEl.style.float = 'inherit';
-            draggedEl.style.backgroundImage = member_control.getIcon(draggedId);
+            draggedEl.style.backgroundImage = memberController.setIcon(draggedId);
 
-            buttons.closeButtons(draggedId);
+            buttonsState.invisible(draggedId);
             var del = arr.indexOf(draggedId);
             arr.splice(del, 1);
         }
     }, {
-        key: 'handleOverDrop2',
-        value: function handleOverDrop2(e) {
+        key: 'handleOverDropMakerPanel',
+        value: function handleOverDropMakerPanel(e) {
             e.preventDefault();
 
             if (arr.length > 6) {
@@ -136,9 +137,9 @@ var DragAndDrop = function () {
             draggedEl.style.width = '200px';
             draggedEl.style.height = '273px';
 
-            draggedEl.style.backgroundImage = member_control.activation(draggedId);
+            draggedEl.style.backgroundImage = memberController.activate(draggedId);
 
-            buttons.openButtons(draggedId);
+            buttonsState.visible(draggedId);
 
             arr.push(draggedId);
         }
@@ -159,14 +160,14 @@ var drag_n_drop = new DragAndDrop();
     }
 
     for (var _i = 0; _i < targets.length; _i++) {
-        targets[_i].addEventListener("dragover", drag_n_drop.handleOverDrop);
-        targets[_i].addEventListener("drop", drag_n_drop.handleOverDrop);
+        targets[_i].addEventListener("dragover", drag_n_drop.handleOverDropIconPanel);
+        targets[_i].addEventListener("drop", drag_n_drop.handleOverDropIconPanel);
         targets[_i].addEventListener("dragenter", drag_n_drop.handleDragEnterLeave);
         targets[_i].addEventListener("dragleave", drag_n_drop.handleDragEnterLeave);
     }
     for (var _i2 = 0; _i2 < targets.length; _i2++) {
-        targets2[_i2].addEventListener("dragover", drag_n_drop.handleOverDrop2);
-        targets2[_i2].addEventListener("drop", drag_n_drop.handleOverDrop2);
+        targets2[_i2].addEventListener("dragover", drag_n_drop.handleOverDropMakerPanel);
+        targets2[_i2].addEventListener("drop", drag_n_drop.handleOverDropMakerPanel);
         targets2[_i2].addEventListener("dragenter", drag_n_drop.handleDragEnterLeave);
         targets2[_i2].addEventListener("dragleave", drag_n_drop.handleDragEnterLeave);
     }
@@ -174,17 +175,16 @@ var drag_n_drop = new DragAndDrop();
 
 //класс контроля участника
 
-var MemberControl = function () {
-    function MemberControl() {
-        _classCallCheck(this, MemberControl);
+var MemberController = function () {
+    function MemberController() {
+        _classCallCheck(this, MemberController);
     }
 
-    _createClass(MemberControl, [{
-        key: 'activation',
+    _createClass(MemberController, [{
+        key: 'activate',
 
         //активации участника
-        value: function activation(draggedId) {
-
+        value: function activate(draggedId) {
             if ('box1' == draggedId) {
                 return manDancer.play();
             }
@@ -229,8 +229,8 @@ var MemberControl = function () {
         //отключает участника
 
     }, {
-        key: 'pause',
-        value: function pause(draggedId) {
+        key: 'deactivate',
+        value: function deactivate(draggedId) {
             if ('box1' == draggedId) {
                 return manDancer.pause();
             }
@@ -274,8 +274,8 @@ var MemberControl = function () {
         //получить иконку вместо учасника
 
     }, {
-        key: 'getIcon',
-        value: function getIcon(draggedId) {
+        key: 'setIcon',
+        value: function setIcon(draggedId) {
             if ('box1' == draggedId) {
                 return 'url(' + "icons/icoHalpah.png" + ')';
             }
@@ -329,33 +329,33 @@ var MemberControl = function () {
         }
     }]);
 
-    return MemberControl;
+    return MemberController;
 }();
 
-var member_control = new MemberControl();
+var memberController = new MemberController();
 
 //обработчики кнопок solo(on-off) and play(on-off)
 
-var ButtonHandler = function () {
-    function ButtonHandler() {
-        _classCallCheck(this, ButtonHandler);
+var MemberControlButtons = function () {
+    function MemberControlButtons() {
+        _classCallCheck(this, MemberControlButtons);
     }
 
-    _createClass(ButtonHandler, [{
-        key: 'activateSolo',
+    _createClass(MemberControlButtons, [{
+        key: 'soloPerformance',
 
 
         // Вешаем обработчик клика на solo  каждого участника
-        value: function activateSolo() {
+        value: function soloPerformance() {
             var _loop = function _loop(i) {
                 document.querySelector('#btnSoloOn' + i).addEventListener('click', function (e) {
                     var elemIndex = arr.indexOf('box' + i);
                     for (var index = 0; index < arr.length; index++) {
                         var elem = document.getElementById(arr[index]);
                         if (index != elemIndex) {
-                            elem.style.backgroundImage = member_control.pause(arr[index]);
+                            elem.style.backgroundImage = memberController.deactivate(arr[index]);
                         } else {
-                            elem.style.backgroundImage = member_control.activation(arr[index]);
+                            elem.style.backgroundImage = memberController.activate(arr[index]);
                         }
                     }
                 });
@@ -366,13 +366,13 @@ var ButtonHandler = function () {
             }
         }
     }, {
-        key: 'deactivateSolo',
-        value: function deactivateSolo() {
+        key: 'resumePerformance',
+        value: function resumePerformance() {
             for (var i = 1; i <= 13; i++) {
                 document.querySelector('#btnSoloOff' + i).addEventListener('click', function (e) {
                     for (var index = 0; index < arr.length; index++) {
                         var elem = document.getElementById(arr[index]);
-                        elem.style.backgroundImage = member_control.activation(arr[index]);
+                        elem.style.backgroundImage = memberController.activate(arr[index]);
                     }
                 });
             }
@@ -387,7 +387,7 @@ var ButtonHandler = function () {
                 document.querySelector('#btnPause' + index).addEventListener('click', function (e) {
                     var elemIndex = arr.indexOf('box' + index);
                     var elem = document.getElementById(arr[elemIndex]);
-                    elem.style.backgroundImage = member_control.pause(arr[elemIndex]);
+                    elem.style.backgroundImage = memberController.deactivate(arr[elemIndex]);
                 });
             };
 
@@ -402,7 +402,7 @@ var ButtonHandler = function () {
                 document.querySelector('#btnPlay' + index).addEventListener('click', function (e) {
                     var elemIndex = arr.indexOf('box' + index);
                     var elem = document.getElementById(arr[elemIndex]);
-                    elem.style.backgroundImage = member_control.activation(arr[elemIndex]);
+                    elem.style.backgroundImage = memberController.activate(arr[elemIndex]);
                 });
             };
 
@@ -412,11 +412,11 @@ var ButtonHandler = function () {
         }
     }]);
 
-    return ButtonHandler;
+    return MemberControlButtons;
 }();
 
-var button_handler = new ButtonHandler();
-button_handler.activateSolo();
-button_handler.deactivateSolo();
-button_handler.pause();
-button_handler.play();
+var memberControlButtons = new MemberControlButtons();
+memberControlButtons.soloPerformance();
+memberControlButtons.resumePerformance();
+memberControlButtons.pause();
+memberControlButtons.play();

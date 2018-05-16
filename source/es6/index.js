@@ -1,4 +1,4 @@
-import {closeButtons,openButtons} from "./buttons.js";
+import {ButtonsState} from "./ButtonsState.js";
 import {Dance} from './Dancing.js';
 import {WindInstrument , StringInstrumet , PercussionInstrument, BowInstrument, KeyboardInstrument } from './Instrument.js';
 import {ManDancer,WomanDancer,ManSinger,WomanSinger,Musician} from './Member.js'; 
@@ -39,6 +39,8 @@ let saxPlayer = new Musician(sax,'url(' + "img/gif/sax.gif" + ')','url(' + "img/
 let violinPlayer = new Musician(violin,'url(' + "img/gif/violin.gif" + ')','url(' + "img/stopGif/violin.jpg" + ')'); // созданы люди играющие на инструментах
 
 let arr = [];
+//solo and play кнопки чтоб появлялись и исчезали при дропахмод
+let buttonsState = new ButtonsState();
 //класс драгендропа
 class DragAndDrop{
 
@@ -60,7 +62,7 @@ class DragAndDrop{
     }
 
 
-    handleOverDrop(e) {
+    handleOverDropIconPanel(e) {
         e.preventDefault();
 
         if (e.type != "drop") {
@@ -83,15 +85,15 @@ class DragAndDrop{
         draggedEl.style.width = '200px';
         draggedEl.style.height = '200px';
         draggedEl.style.float = 'inherit';
-        draggedEl.style.backgroundImage =member_control.getIcon(draggedId);
+        draggedEl.style.backgroundImage = memberController.setIcon(draggedId);
 
         
-        closeButtons(draggedId);
+        buttonsState.invisible(draggedId);
         let del = arr.indexOf(draggedId);
         arr.splice(del,1);
     }
 
-    handleOverDrop2(e) {
+    handleOverDropMakerPanel(e) {
         e.preventDefault();
 
         if(arr.length>6){
@@ -120,10 +122,10 @@ class DragAndDrop{
         draggedEl.style.width = '200px';
         draggedEl.style.height = '273px'; 
 
-        draggedEl.style.backgroundImage = member_control.activation(draggedId);
+        draggedEl.style.backgroundImage = memberController.activate(draggedId);
         
         
-        openButtons(draggedId);
+        buttonsState.visible(draggedId);
         
         arr.push(draggedId);   
         
@@ -142,24 +144,23 @@ let drag_n_drop = new DragAndDrop();
     }
     
     for (let i = 0; i < targets.length; i++) {
-        targets[i].addEventListener("dragover", drag_n_drop.handleOverDrop);
-        targets[i].addEventListener("drop",drag_n_drop.handleOverDrop);
+        targets[i].addEventListener("dragover", drag_n_drop.handleOverDropIconPanel);
+        targets[i].addEventListener("drop",drag_n_drop.handleOverDropIconPanel);
         targets[i].addEventListener("dragenter",drag_n_drop.handleDragEnterLeave);
         targets[i].addEventListener("dragleave",drag_n_drop.handleDragEnterLeave);
     }
     for (let i = 0; i < targets.length; i++) {
-        targets2[i].addEventListener("dragover",drag_n_drop.handleOverDrop2);
-        targets2[i].addEventListener("drop", drag_n_drop.handleOverDrop2);
+        targets2[i].addEventListener("dragover",drag_n_drop.handleOverDropMakerPanel);
+        targets2[i].addEventListener("drop", drag_n_drop.handleOverDropMakerPanel);
         targets2[i].addEventListener("dragenter", drag_n_drop.handleDragEnterLeave);
         targets2[i].addEventListener("dragleave", drag_n_drop.handleDragEnterLeave);
     }
 })();
 
 //класс контроля участника
-class MemberControl{
+class MemberController{
     //активации участника
-    activation(draggedId){
-        
+    activate(draggedId){
         if('box1' == draggedId){
             return manDancer.play();
         }
@@ -202,7 +203,7 @@ class MemberControl{
     }
 
     //отключает участника
-    pause(draggedId){
+    deactivate(draggedId){
         if('box1' == draggedId){
             return manDancer.pause();
         }
@@ -244,7 +245,7 @@ class MemberControl{
         }
     }
     //получить иконку вместо учасника
-    getIcon(draggedId){
+    setIcon(draggedId){
         if('box1' == draggedId){
             return 'url(' + "icons/icoHalpah.png" + ')';
         }
@@ -298,16 +299,16 @@ class MemberControl{
     }
 }
 
-let member_control = new MemberControl();
+let memberController = new MemberController();
 
 
 
 
 //обработчики кнопок solo(on-off) and play(on-off)
-class ButtonHandler{
+class MemberControlButtons{
 
     // Вешаем обработчик клика на solo  каждого участника
-    activateSolo(){
+    soloPerformance(){
         
         for (let i = 1; i <=13; i++) {
             document.querySelector('#btnSoloOn'+i).addEventListener('click', function(e){ 
@@ -315,21 +316,21 @@ class ButtonHandler{
                 for (let index = 0; index < arr.length; index++){
                     let elem = document.getElementById(arr[index]);
                         if(index!=elemIndex){
-                            elem.style.backgroundImage =member_control.pause(arr[index]);
+                            elem.style.backgroundImage = memberController.deactivate(arr[index]);
                         }else{
-                            elem.style.backgroundImage = member_control.activation(arr[index]);
+                            elem.style.backgroundImage = memberController.activate(arr[index]);
                         }
                     }
             });
         }
     }
 
-    deactivateSolo(){    
+    resumePerformance(){    
         for (let i = 1; i <=13; i++) {
             document.querySelector('#btnSoloOff'+i).addEventListener('click', function(e){ 
                 for (let index = 0; index < arr.length; index++) {
                     let elem = document.getElementById(arr[index]);
-                    elem.style.backgroundImage = member_control.activation(arr[index]);
+                    elem.style.backgroundImage = memberController.activate(arr[index]);
                 }
             });
         }
@@ -341,7 +342,7 @@ class ButtonHandler{
             document.querySelector('#btnPause'+index).addEventListener('click', function(e){ 
                 let elemIndex = arr.indexOf('box'+index);
                 let elem = document.getElementById(arr[elemIndex]);
-                elem.style.backgroundImage = member_control.pause(arr[elemIndex]);
+                elem.style.backgroundImage = memberController.deactivate(arr[elemIndex]);
             });
         }
     }
@@ -351,14 +352,14 @@ class ButtonHandler{
             document.querySelector('#btnPlay'+index).addEventListener('click', function(e){ 
                 let elemIndex = arr.indexOf('box'+index);
                 let elem = document.getElementById(arr[elemIndex]);
-                elem.style.backgroundImage = member_control.activation(arr[elemIndex]);
+                elem.style.backgroundImage = memberController.activate(arr[elemIndex]);
             });
         }
     }
 }
 
-let button_handler = new ButtonHandler();
-button_handler.activateSolo();
-button_handler.deactivateSolo();
-button_handler.pause();
-button_handler.play();
+let memberControlButtons = new MemberControlButtons();
+memberControlButtons.soloPerformance();
+memberControlButtons.resumePerformance();
+memberControlButtons.pause();
+memberControlButtons.play();
